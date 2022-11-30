@@ -1,31 +1,25 @@
 package hello.world;
 
-
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.validation.constraints.Size;
-
+import hello.world.nats.NATSMessage;
 import org.reactivestreams.Publisher;
 
 import io.micronaut.core.async.annotation.SingleResult;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
-import io.micronaut.validation.Validated;
 import jakarta.inject.Inject;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.nio.charset.StandardCharsets;
+
 @Controller("/helloController")
-@Validated
 public class HelloControllerController {
 
     @Inject
     DataService dataService;
 
-    Map<String, Person> inMemoryDatastore = new ConcurrentHashMap<>();
+    @Inject
+    NATSMessage natsMessage;
 
     @Get(uri="/", produces="text/plain")
     public String index() {
@@ -38,25 +32,38 @@ public class HelloControllerController {
     @Get(uri="/mul", produces="text/plain")
     public String mul() {
 
-        return dataService.getMultimap();
+
+        //String multimap = dataService.getMultimap();
+        natsMessage.send("multimap".getBytes(StandardCharsets.UTF_8));
+        return "hello";
+//        String str = natsMessage.sendMsg("hello");
+//        return str;
 
         // return "Example Response";
     }
 
 
-    // @Post(value = "/echo", consumes = MediaType.APPLICATION_JSON, produces = MediaType.TEXT_PLAIN) // 
-    // public String echo(@Size(max = 1024) @Body String text) { // 
-    //     return text; // 
-    // }
+    @Post(value = "/echo", consumes = MediaType.TEXT_PLAIN, produces = MediaType.TEXT_PLAIN) // 
+    public String test11(@Body String text) { // 
+        return text; // 
+    }
 
-    @Post(value = "/saveReactive", consumes = MediaType.APPLICATION_JSON)
+    @Post(value = "/save")
     @SingleResult
-    public Publisher<HttpResponse<Person>> save(@Body Publisher<Person> person) { // 
+    public Publisher<HttpResponse<Person1>> save(@Body Publisher<Person1> person) { // 
         return Mono.from(person).map(p -> {
-                    inMemoryDatastore.put(p.getFirstName(), p); // 
+                    dataService.saveRedisPerson(p.getName(),p.getAge());
                     return HttpResponse.created(p); // 
                 }
         );
+    }
+
+    @Get(uri="/getSize", produces="text/plain")
+    public String getBuffSize() {
+
+        return Integer.toString(dataService.getAllBuff()) ;
+
+        // return "Example Response";
     }
 
 }
