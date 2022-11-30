@@ -1,0 +1,21 @@
+{
+  "types":[
+    {
+      "name":"java.rmi.server.RemoteObject"
+    },
+    {
+      "name":"java.rmi.server.RemoteStub"
+    },
+    {
+      "name":"java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet",
+      "customTargetConstructorClass":"java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet"
+    },
+    {
+      "name":"javax.management.remote.rmi.RMIServerImpl_Stub"
+    }
+  ],
+  "lambdaCapturingTypes":[
+  ],
+  "proxies":[
+  ]
+}
