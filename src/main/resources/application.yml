@@ -15,3 +15,29 @@ redisson:
 
 nats.addresses:
 - nats://localhost:4222
+
+
+datasources:
+  default:
+#    url: jdbc:h2:mem:test;INIT=runscript from '~/create.sql';LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:tcp://localhost/~/test;INIT=runscript from '~/create.sql';CACHE_SIZE=30720;CACHE_TYPE=SOFT_LRU
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+    schema-generate: CREATE
+    dialect: H2
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+    entity-scan:
+      packages: 'hello.world'
+
+
+logger:
+  levels:
+    hello.world: DEBUG

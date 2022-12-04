@@ -1,11 +1,7 @@
 package hello.world;
 
-import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 import org.redisson.api.LocalCachedMapOptions;
@@ -18,12 +14,9 @@ import org.redisson.api.LocalCachedMapOptions.EvictionPolicy;
 import org.redisson.api.LocalCachedMapOptions.ReconnectionStrategy;
 import org.redisson.api.LocalCachedMapOptions.StoreMode;
 import org.redisson.api.MapOptions.WriteMode;
-import org.redisson.api.map.MapLoader;
-import org.redisson.api.map.MapWriter;
-import org.redisson.api.map.MapWriterAsync;
 
-import hello.world.MySQL.MySQL;
 import hello.world.nats.NATSMessage;
+
 import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.Parallel;
 import jakarta.inject.Inject;
@@ -42,8 +35,6 @@ public class DataService {
     LocalCachedMapOptions<String, String> localCachedMapOptions;
     RLocalCachedMap<String, String> localCachedMap;
     RRingBuffer<String> buffer;
-
-    private MySQL mySQL = null;
 
     // UsersService usersService ;
 
@@ -136,7 +127,6 @@ public class DataService {
         //     e.printStackTrace();
         // }
         // usersService = new UsersService();
-        mySQL = new MySQL("jdbc:mysql://127.0.0.1:3306/test", "root", "jackson");
 
         buffer = redisson.getRingBuffer("buff");
         buffer.setCapacity(10000);

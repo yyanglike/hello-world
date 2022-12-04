@@ -18,22 +18,7 @@
   "name":"[J"
 },
 {
-  "name":"[Lcom.fasterxml.jackson.databind.deser.BeanDeserializerModifier;"
-},
-{
-  "name":"[Lcom.fasterxml.jackson.databind.deser.Deserializers;"
-},
-{
-  "name":"[Lcom.fasterxml.jackson.databind.deser.KeyDeserializers;"
-},
-{
-  "name":"[Lcom.fasterxml.jackson.databind.deser.ValueInstantiators;"
-},
-{
-  "name":"[Lcom.fasterxml.jackson.databind.ser.BeanSerializerModifier;"
-},
-{
-  "name":"[Lcom.fasterxml.jackson.databind.ser.Serializers;"
+  "name":"[Lcom.zaxxer.hikari.util.ConcurrentBag$IConcurrentBagEntry;"
 },
 {
   "name":"[Lio.micronaut.aop.Interceptor;"
@@ -52,10 +37,6 @@
 },
 {
   "name":"[Z"
-},
-{
-  "name":"apple.security.AppleProvider",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"ch.qos.logback.classic.encoder.PatternLayoutEncoder",
@@ -126,74 +107,11 @@
   "name":"com.aayushatharva.brotli4j.Brotli4jLoader"
 },
 {
-  "name":"com.fasterxml.jackson.databind.ext.Java7HandlersImpl",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"com.fasterxml.jackson.databind.ext.Java7SupportImpl",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"com.mysql.cj.PerConnectionLRUFactory",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.mysql.cj.conf.url.SingleConnectionUrl",
-  "methods":[{"name":"<init>","parameterTypes":["com.mysql.cj.conf.ConnectionUrlParser","java.util.Properties"] }]
-},
-{
-  "name":"com.mysql.cj.jdbc.AbandonedConnectionCleanupThread"
-},
-{
-  "name":"com.mysql.cj.jdbc.Driver"
-},
-{
-  "name":"com.mysql.cj.log.StandardLogger",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
-},
-{
-  "name":"com.mysql.cj.protocol.StandardSocketFactory",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.mysql.cj.util.PerVmServerConfigCacheFactory",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.AESCipher$General",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.ARCFOURCipher",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.ChaCha20Cipher$ChaCha20Poly1305",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.DESCipher",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.DESedeCipher",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.DHParameters",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.GaloisCounterMode$AESGCM",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.HmacCore$HmacSHA384",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"com.sun.crypto.provider.TlsMasterSecretGenerator",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
+  "name":"com.ibm.icu.text.Collator"
 },
 {
   "name":"com.sun.management.GarbageCollectorMXBean",
@@ -252,7 +170,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"hello.world.$Person1$IntrospectionRef",
+  "name":"hello.world.$Person$IntrospectionRef",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -260,14 +178,36 @@
   "fields":[{"name":"redisson"}]
 },
 {
-  "name":"hello.world.Person1",
-  "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true
+  "name":"hello.world.datamanager.$DataManager$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"hello.world.jdbc.dto.$BookRepository$Intercepted$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"hello.world.jdbc.dto.$YunRecordRepository$Intercepted$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"hello.world.jdbc.entity.$Book$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"hello.world.jdbc.entity.$YunRecord$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"hello.world.nats.$NATSListener$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"hello.world.nats.$NATSMessage$Intercepted$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"hello.world.nats.NATSListener",
+  "fields":[{"name":"dataService"}]
 },
 {
   "name":"io.methvin.watchservice.MacOSXListeningWatchService"
@@ -285,6 +225,25 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"io.micronaut.configuration.jdbc.hikari.$BeanConfiguration",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.configuration.jdbc.hikari.$DatasourceConfiguration$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.context.annotation.Prototype"
+},
+{
   "name":"io.micronaut.context.env.PropertiesPropertySourceLoader",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -294,6 +253,497 @@
 },
 {
   "name":"io.micronaut.context.event.ApplicationEventPublisherFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.core.async.publisher.Publishers"
+},
+{
+  "name":"io.micronaut.data.intercept.$DataInterceptorResolver$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.intercept.$DataIntroductionAdvice$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.config.$DataJdbcConfiguration$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.config.$SchemaGenerator$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.convert.vendor.$OracleTypeConvertersFactory$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.convert.vendor.$OracleTypeConvertersFactory$FromOracleDateToInstant2$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.convert.vendor.$OracleTypeConvertersFactory$FromOracleDateToLocalDateTime1$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.convert.vendor.$OracleTypeConvertersFactory$FromOracleDateToTimestamp0$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.convert.vendor.$OracleTypeConvertersFactory$FromOracleTimestampToInstant5$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.convert.vendor.$OracleTypeConvertersFactory$FromOracleTimestampToLocalDateTime4$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.convert.vendor.$OracleTypeConvertersFactory$FromOracleTimestampToTimestamp3$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.operations.$DefaultJdbcRepositoryOperations$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.transaction.$TransactionManagersFactory$BuildAsyncTransactionOperations0$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.jdbc.transaction.$TransactionManagersFactory$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.$DefaultPage$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.$DefaultPageable$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.$DefaultSlice$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.$Pageable$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.naming.$NamingStrategies$KebabCase$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.naming.$NamingStrategies$LowerCase$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.naming.$NamingStrategies$Raw$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.naming.$NamingStrategies$UnderScoreSeparatedLowerCase$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.naming.$NamingStrategies$UnderScoreSeparatedUpperCase$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.naming.$NamingStrategies$UpperCase$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.query.builder.$AbstractSqlLikeQueryBuilder$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.query.builder.jpa.$JpaQueryBuilder$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.model.query.builder.sql.$SqlQueryBuilder$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.config.$DataConfiguration$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.config.$DataConfiguration$PageableConfiguration$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.convert.$DataConversionServiceFactory$Build0$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.convert.$DataConversionServiceFactory$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.criteria.$RuntimeCriteriaBuilder$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.criteria.metamodel.$StaticMetamodelInitializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.date.$CurrentDateTimeProvider$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.event.$EntityEventRegistry$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.event.listeners.$AnnotatedMethodInvokingEntityEventListener$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.event.listeners.$AutoTimestampEntityEventListener$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.event.listeners.$UUIDGeneratingEntityEventListener$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.event.listeners.$VersionGeneratingEntityEventListener$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.http.$PageableRequestArgumentBinder$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$AbstractQueryInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultCountInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultDeleteAllInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultDeleteOneInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultExistsByInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultFindAllInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultFindByIdInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultFindOneInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultFindOptionalInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultFindPageInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultFindSliceInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultFindStreamInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultSaveAllInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultSaveEntityInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultSaveOneInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultUpdateAllEntitiesInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultUpdateEntityInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.$DefaultUpdateInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$AbstractAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$AbstractConvertCompletionStageInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$AbstractCountConvertCompletionStageInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultCountAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultDeleteAllAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultDeleteOneAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultExistsByAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultFindAllAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultFindByIdAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultFindOneAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultFindPageAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultFindSliceAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultSaveAllAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultSaveEntityInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultSaveOneAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultUpdateAllAsyncEntitiesInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultUpdateAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.async.$DefaultUpdateEntityAsyncInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$AbstractSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$CountSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$DeleteAllSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$ExistsSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$FindAllSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$FindOneSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$FindPageSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.$UpdateAllSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$AbstractAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$CountAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$DeleteAllAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$ExistsAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$FindAllAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$FindOneAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$FindPageAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.async.$UpdateAllAsyncSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$AbstractReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$CountReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$DeleteAllReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$ExistsReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$FindAllReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$FindOneReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$FindPageReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.criteria.reactive.$UpdateAllReactiveSpecificationInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$AbstractCountOrEntityPublisherInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$AbstractPublisherInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$AbstractReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultCountReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultDeleteAllReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultDeleteOneReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultExistsByReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultFindAllReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultFindByIdReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultFindOneReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultFindPageReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultFindSliceReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultSaveAllReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultSaveEntityReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultSaveOneReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultUpdateAllEntitiesReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultUpdateEntityReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.intercept.reactive.$DefaultUpdateReactiveInterceptor$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.support.$DefaultRuntimeEntityRegistry$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.support.convert.$DefaultAttributeConverterRegistry$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.support.convert.convert.jpa.$JakartaAttributeConverterProvider$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.data.runtime.support.convert.convert.jpa.$JxAttributeConverterProvider$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -547,19 +997,6 @@
 {
   "name":"io.micronaut.http.netty.configuration.$NettyGlobalConfiguration$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.http.netty.reactive.HandlerPublisher",
-  "methods":[
-    {"name":"channelActive","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"channelInactive","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"channelRead","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }, 
-    {"name":"channelRegistered","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"exceptionCaught","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Throwable"] }
-  ]
-},
-{
-  "name":"io.micronaut.http.netty.stream.HttpStreamsHandler$2"
 },
 {
   "name":"io.micronaut.http.netty.stream.HttpStreamsServerHandler",
@@ -945,34 +1382,6 @@
   "name":"io.micronaut.inject.provider.JavaxProviderBeanDefinition"
 },
 {
-  "name":"io.micronaut.jackson.$BeanConfiguration",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.$JacksonConfiguration$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.$ObjectMapperFactory$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.$ObjectMapperFactory$JsonFactory0$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.$ObjectMapperFactory$ObjectMapper1$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.codec.$JsonMediaTypeCodec$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.codec.$JsonStreamMediaTypeCodec$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"io.micronaut.jackson.core.env.CloudFoundryVcapApplicationPropertySourceLoader",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -989,51 +1398,27 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.jackson.databind.$DatabindPropertyBinderExceptionHandler$Definition$Reference",
+  "name":"io.micronaut.jdbc.spring.$DataSourceTransactionManagerFactory$DataSourceTransactionManager0$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.jackson.databind.$JacksonDatabindMapper$Definition$Reference",
+  "name":"io.micronaut.jdbc.spring.$DataSourceTransactionManagerFactory$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.jackson.databind.convert.$JacksonConverterRegistrar$Definition$Reference",
+  "name":"io.micronaut.jdbc.spring.$DataSourceTransactionManagerFactory$TransactionAwareDataSourceListener1$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.jackson.modules.$BeanIntrospectionModule$Definition$Reference",
+  "name":"io.micronaut.jdbc.spring.$DataSourceTransactionManagerFactory$TransactionAwareDataSourceListenerUnwrapper2$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.jackson.serialize.$ConvertibleMultiValuesSerializer$Definition$Reference",
+  "name":"io.micronaut.jdbc.spring.$HibernatePresenceCondition$IntrospectionRef",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.jackson.serialize.$ConvertibleValuesSerializer$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.serialize.$JacksonObjectSerializer$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.serialize.$JsonNodeDeserializer$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.serialize.$JsonNodeSerializer$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.serialize.$OptionalValuesSerializer$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.serialize.$ResourceModule$Definition$Reference",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.jackson.serialize.$ResourceSerializerModifier$Definition$Reference",
+  "name":"io.micronaut.jdbc.spring.$SpringDataSourceResolver$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -1409,6 +1794,262 @@
 },
 {
   "name":"io.micronaut.scheduling.processor.$ScheduledMethodProcessor$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.config.$DeserializationConfiguration$Intercepted$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.config.$SerdeConfiguration$Intercepted$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.config.$SerializationConfiguration$Intercepted$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.jackson.$JacksonJsonMapper$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.$AdditionalSerdes$IntrospectionRef0",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.$AdditionalSerdes$IntrospectionRef1",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.$AdditionalSerdes$IntrospectionRef2",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.$AdditionalSerdes$IntrospectionRef3",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.$DefaultSerdeIntrospections$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.$DefaultSerdeRegistry$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.bind.$SerdeJsonBeanPropertyBinderExceptionHandler$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.config.$SerdeJsonConfiguration$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$ArrayDequeDeserializer2$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$ArrayListDeserializer1$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$DefaultSetDeserializer5$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$HashSetDeserializer4$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$LinkedHashMapDeserializer8$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$LinkedHashSetDeserializer6$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$LinkedListDeserializer3$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$OptionalDeserializer10$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$StringDeserializer0$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$TreeMapDeserializer9$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$CoreDeserializers$TreeSetDeserializer7$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.deserializers.$ObjectDeserializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$CoreSerdes$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$CoreSerdes$DurationSerde1$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$CoreSerdes$ObjectArraySerde0$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$CoreSerdes$PeriodSerde2$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$DateSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$EnumSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$EnumSetDeserializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$HealthStatusSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$InstantSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$LocalDateSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$LocalDateTimeSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$LocalTimeSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$OffsetDateTimeSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$SqlDateSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$SqlTimestampSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$YearSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serdes.$ZonedDateTimeSerde$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$CoreSerializers$BooleanSerializer3$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$CoreSerializers$CharSequenceSerializer0$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$CoreSerializers$CharSerializer2$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$CoreSerializers$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$CoreSerializers$MapSerializer4$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$CoreSerializers$StringSerializer1$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$IterableSerializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$ObjectSerializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$OptionalMultiValuesSerializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$OptionalSerializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$OptionalValuesSerializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.serde.support.serializers.$StreamSerializer$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.interceptor.$CoroutineTxHelper$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.interceptor.$TransactionalEventInterceptor$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.interceptor.$TransactionalInterceptor$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.jdbc.$DataSourceTransactionManager$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.jdbc.$DelegatingDataSourceResolver$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.jdbc.$TransactionAwareDataSource$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.jdbc.$TransactionalConnection$Intercepted$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.jdbc.$TransactionalConnectionInterceptor$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.test.$DefaultTestTransactionExecutionListener$Definition$Reference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.transaction.test.$SpockMethodTransactionDefinitionProvider$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -1896,6 +2537,10 @@
   "name":"java.lang.String"
 },
 {
+  "name":"java.lang.Throwable",
+  "methods":[{"name":"getSuppressed","parameterTypes":[] }]
+},
+{
   "name":"java.lang.Void",
   "fields":[{"name":"TYPE"}]
 },
@@ -2024,9 +2669,6 @@
   ]
 },
 {
-  "name":"java.security.AlgorithmParametersSpi"
-},
-{
   "name":"java.security.AllPermission"
 },
 {
@@ -2034,12 +2676,6 @@
 },
 {
   "name":"java.security.SecurityPermission"
-},
-{
-  "name":"java.security.interfaces.RSAPrivateKey"
-},
-{
-  "name":"java.security.interfaces.RSAPublicKey"
 },
 {
   "name":"java.sql.Date"
@@ -2151,11 +2787,6 @@
   "methods":[{"name":"<init>","parameterTypes":["java.rmi.server.RemoteRef"] }]
 },
 {
-  "name":"javax.security.auth.x500.X500Principal",
-  "fields":[{"name":"thisX500Name"}],
-  "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
-},
-{
   "name":"javax.smartcardio.CardPermission"
 },
 {
@@ -2188,6 +2819,10 @@
 },
 {
   "name":"kotlinx.coroutines.flow.Flow"
+},
+{
+  "name":"org.h2.Driver",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.redisson.api.RedissonClient",
@@ -2294,6 +2929,9 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"org.springframework.jdbc.datasource.DataSourceTransactionManager"
+},
+{
   "name":"reactor.core.publisher.Flux"
 },
 {
@@ -2361,14 +2999,6 @@
   "methods":[{"name":"<init>","parameterTypes":["java.rmi.server.RemoteRef"] }]
 },
 {
-  "name":"sun.security.provider.DSA$SHA224withDSA",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.provider.DSA$SHA256withDSA",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"sun.security.provider.NativePRNG",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -2377,55 +3007,11 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"sun.security.provider.SHA2$SHA224",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"sun.security.provider.SHA2$SHA256",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"sun.security.provider.SHA5$SHA384",
+  "name":"sun.security.provider.SecureRandom",
   "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.provider.SHA5$SHA512",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.provider.X509Factory",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.rsa.PSSParameters",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.rsa.RSAKeyFactory$Legacy",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.rsa.RSAPSSSignature",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.rsa.RSASignature$SHA224withRSA",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.ssl.KeyManagerFactoryImpl$SunX509",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.ssl.SSLContextImpl$TLSContext",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"sun.security.x509.BasicConstraintsExtension",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
 }
 ]

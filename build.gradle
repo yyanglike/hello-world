@@ -1,7 +1,8 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("io.micronaut.application") version "3.6.2"
-     id("io.micronaut.aot") version "3.6.3"
+    id("io.micronaut.aot") version "3.6.3"
+    id('org.graalvm.buildtools.native') version '0.9.13'
 }
 
 version = "0.1"
@@ -21,17 +22,22 @@ dependencies {
     implementation("io.micronaut.rxjava3:micronaut-rxjava3")
     implementation("io.micronaut.rxjava3:micronaut-rxjava3-http-client")
     implementation('org.redisson:redisson-micronaut-30:3.18.0')
-    implementation("com.zaxxer:HikariCP:5.0.1")
-    runtimeOnly("mysql:mysql-connector-java")
+//    implementation("com.zaxxer:HikariCP:5.0.1")
+//    runtimeOnly("mysql:mysql-connector-java")
     implementation("io.micronaut.nats:micronaut-nats")
 
 
-    // apple M1
-//    implementation("com.kohlschutter.junixsocket:junixsocket-common:2.6.1")
-//    implementation("com.kohlschutter.junixsocket:junixsocket-native-common:2.6.1")
-//    implementation("com.github.docker-java:docker-java:3.2.14")
+    compileOnly("org.graalvm.nativeimage:svm")
 
+    annotationProcessor("io.micronaut.data:micronaut-data-hibernate-jpa")
+    //database
+    implementation("com.h2database:h2:2.1.210")
+    implementation("io.micronaut.data:micronaut-data-jdbc")
+    runtimeOnly("io.micronaut.sql:micronaut-jdbc-hikari")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
 
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor:1.0.1")
 }
 
 
@@ -64,15 +70,30 @@ micronaut {
      }
 }
 
-
+configurations.all {
+    resolutionStrategy.dependencySubstitution {
+        substitute(module("io.micronaut:micronaut-jackson-databind"))
+                .using(module("io.micronaut.serde:micronaut-serde-jackson:1.0.1"))
+    }
+}
 
 graalvmNative {
+    agent {
+        defaultMode = "standard"
+    }
     binaries{
         main{
             buildArgs.add('--verbose')
+//            buildArgs.add('--initialize-at-run-time=java.sql.DriverManager')
+//            buildArgs.add('--initialize-at-build-time=java.sql.DriverManager')
+//            buildArgs.add('--initialize-at-run-time=io.micronaut.core.graal.AutomaticFeatureUtils')
             // buildArgs.add('--gc=G1')
         }
     }
+    metadataRepository {
+        enabled = true
+    }
+    toolchainDetection = false
 }
 
 

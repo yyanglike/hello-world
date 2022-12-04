@@ -3,12 +3,12 @@ package hello.world;
 import io.micronaut.core.annotation.Introspected;
 
 @Introspected
-public class Person1 {
+public class Person {
 
     private String name;
     private int age = 18;
 
-    public Person1(String name) {
+    public Person(String name) {
         this.name = name;
     }
 

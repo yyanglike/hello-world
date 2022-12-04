@@ -1,0 +1,12 @@
+
+
+
+./build/native/nativeCompile/hello-world  -Xms512m -Xmx1024m -Xmn512m -XX:+PrintGC -XX:+VerboseGC
+
+
+DROP TABLE IF EXISTS YUN_RECORD;
+CREATE TABLE `yun_record` (`id` BIGINT AUTO_INCREMENT PRIMARY KEY,`url` VARCHAR(512) NOT NULL,`key` VARCHAR(255) NOT NULL,`value` VARCHAR(4096) NOT NULL)
+
+create index IDXNAME on YUN_RECORD (`ID`,`URL`,`KEY`)
+@index_info null null YUN_RECORD
+
