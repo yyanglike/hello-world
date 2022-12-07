@@ -1,9 +1,20 @@
 package hello.world;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.google.gson.JsonElement;
+import hello.world.jdbc.dto.YunRecordRepository;
+import hello.world.jdbc.entity.YunRecord;
+import hello.world.util.Util;
+import io.micronaut.scheduling.annotation.Scheduled;
+import org.java_websocket.enums.Opcode;
 import org.redisson.api.LocalCachedMapOptions;
 import org.redisson.api.RLocalCachedMap;
 import org.redisson.api.RRingBuffer;
@@ -21,12 +32,29 @@ import io.micronaut.context.annotation.Context;
 import io.micronaut.context.annotation.Parallel;
 import jakarta.inject.Inject;
 
+
+import com.google.gson.JsonObject;
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft_6455;
+import org.java_websocket.handshake.ServerHandshake;
+
+import static com.google.gson.JsonParser.parseString;
+
+
 @Context
 @Parallel
 public class DataService {
 
+    private AtomicBoolean bWebsocketInit = new AtomicBoolean(false);
+    private String _userID;
+    private WebSocketClient cc;
+
     @Inject
     private RedissonClient redisson;
+
+    @Inject
+    private YunRecordRepository yunRecordRepository;
 
     @Inject
     NATSMessage natsMessage;
@@ -212,4 +240,116 @@ public class DataService {
         return "OK";
     }
 
+
+    //yuandayun
+
+    private void extracted() {
+        System.out.println("================================================================");
+        bWebsocketInit.set(false);
+        try {
+            cc = new WebSocketClient(new URI("wss://hqyun.ydtg.com.cn?username=abc&password=123"), new Draft_6455()) {
+                @Override
+                public void onOpen(ServerHandshake serverHandshake) {
+                    System.out.println("onOPen=======================================");
+                }
+
+                @Override
+                public void onMessage(String s) {
+//                    System.out.println(s);
+                    JsonObject msg = parseString(s).getAsJsonObject();
+
+                    if( msg != null){
+                        int iCommand = msg.get("command").getAsInt();
+                        if( iCommand != 14){
+                            int iCode = msg.get("code").getAsInt();
+
+                            if( iCode == 10007  && iCommand == 6){
+                                JsonObject obj = msg.getAsJsonObject("data");
+                                JsonObject _userObj = obj.getAsJsonObject("user");
+                                System.out.println(_userObj);
+                                if(!_userObj.isJsonNull()){
+                                    _userID = _userObj.get("id").getAsString();
+                                    System.out.println(_userID);
+                                    register_data(7,"/quote_provider_yun");
+                                }
+
+                            }
+                            else if(iCode == 1101 && iCommand == 12){
+                                JsonObject obj = msg.getAsJsonObject("data");
+                                String value = obj.get("nodeContent").getAsString();
+                                String m = value.replace('<','{');
+                                m = m.replace('$',':');
+                                m = m.replace('>','}');
+
+                                String key = obj.get("nodePath").getAsString();
+
+//                                System.out.println( key + " : "  + value);
+                                String[] split = key.split("/");
+//                                System.out.println(split[0] + "::::"+split[1]);
+                                Optional<YunRecord> byUrlEqualAndKeyEqual = yunRecordRepository.findByUrlEqualAndKeyEqual(split[1], split[2]);
+                                if(byUrlEqualAndKeyEqual.isPresent()){
+                                    JsonElement jsonElement = parseString(m);
+                                    JsonElement jsonUpdate = parseString(byUrlEqualAndKeyEqual.get().getValue());
+                                    Util.combinJson(jsonElement, jsonUpdate );
+                                    yunRecordRepository.updateById(byUrlEqualAndKeyEqual.get().getId(),Util.converJsonToString(jsonUpdate));
+                                }
+                                else {
+                                    yunRecordRepository.save(new YunRecord(split[1],split[2],m));
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+//                @Override
+//                public void onMessage(ByteBuffer bytes) {
+//                    System.out.println("ByteBuffer:" + bytes);
+//                }
+
+                @Override
+                public void onClose(int i, String s, boolean b) {
+                    System.out.println(s);
+                    bWebsocketInit.set(false);
+                }
+
+                @Override
+                public void onError(Exception e) {
+//                        System.out.println(e);
+                }
+            };
+
+            cc.connect();
+        } catch (URISyntaxException ex){
+            System.out.println(ex);
+        }
+        bWebsocketInit.set(true);
+    }
+
+    private void register_data(int cmd,String path){
+        JsonObject user = new JsonObject();
+        user.addProperty("id", _userID);
+        JsonObject reg_obj = new JsonObject();
+        reg_obj.add("user",user);
+        reg_obj.addProperty("cmd",cmd);
+        reg_obj.addProperty("path","yuanda/node"+ path);
+        if( cc != null) {
+//            cc.sendFragmentedFrame(Opcode.BINARY, ByteBuffer.wrap(reg_obj.toString().getBytes(StandardCharsets.UTF_8)),true);
+            cc.send(reg_obj.toString());
+        }
+    }
+
+//    @Scheduled(fixedDelay = "10s")
+    public void check_connection(){
+        JsonObject user = new JsonObject();
+        user.addProperty("cmd",13);
+        user.addProperty("hbbyte",-127);
+        if( cc != null &&  !cc.isClosed() && cc.isOpen()){
+            cc.sendFragmentedFrame(Opcode.BINARY, ByteBuffer.wrap(user.toString().getBytes()),true);
+        }
+        else{
+            if( !bWebsocketInit.get())
+                extracted();
+        }
+    }
 }

@@ -1,11 +1,12 @@
 package hello.world.jdbc.entity;
 
 
-import io.micronaut.context.annotation.Type;
+import io.micronaut.data.annotation.DateCreated;
+import io.micronaut.data.annotation.DateUpdated;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.*;
 
-import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
 @Serdeable
 @Entity
@@ -20,18 +21,23 @@ public class YunRecord {
     @Column(length = 255)
     private String key;
 
-
     @Column(length = 4096)
     private String value;
 
-    public YunRecord(String url,String key , String value){
-        this.url = url;
-        this.key = key;
-        this.value = value;
+    @DateCreated
+    private Date dateIn;
+
+    @DateUpdated
+    private Date dateUp;
+
+    public YunRecord(String url,String key,String value){
+        this.setUrl(url);
+        this.setKey(key);
+        this.setValue(value);
     }
 
     public YunRecord() {
-
+        
     }
 
     public Long getId() {
@@ -64,5 +70,21 @@ public class YunRecord {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Date getDateUp() {
+        return dateUp;
+    }
+
+    public void setDateUp(Date dateUp) {
+        this.dateUp = dateUp;
+    }
+
+    public Date getDateIn() {
+        return dateIn;
+    }
+
+    public void setDateIn(Date dateIn) {
+        this.dateIn = dateIn;
     }
 }

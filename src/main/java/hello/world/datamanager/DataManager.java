@@ -1,31 +1,39 @@
 package hello.world.datamanager;
 
-import hello.world.jdbc.dto.BookRepository;
-import io.micronaut.scheduling.annotation.Scheduled;
-import jakarta.inject.Inject;
+
+import io.micronaut.context.annotation.Context;
 import jakarta.inject.Singleton;
+import org.h2.tools.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Singleton
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.sql.SQLException;
+
+@Context
 public class DataManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataManager.class);
 
-    @Inject
-    BookRepository bookRepository;
+    private Server server;
 
 
-//    @Scheduled(initialDelay = "10s",fixedRate = "20s")
-//    void checkRecords(){
-//        long lSize = bookRepository.count();
-//        LOG.debug("Start Clear Records." + lSize);
-//        if(lSize > 10000){
-//            bookRepository.deleteAll();
-//            LOG.debug("Delete Count size:" ,lSize);
-//        }
-//    }
-    public long getSize(){
-        return bookRepository.count();
+    @PostConstruct
+    void init(){
+        try {
+            server = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9090");
+            server.start();
+            LOG.debug("H2 database startup at port 9090.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    @PreDestroy
+    void destroy(){
+        server.shutdown();
+    }
+
+
 }

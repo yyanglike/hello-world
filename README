@@ -10,3 +10,58 @@ CREATE TABLE `yun_record` (`id` BIGINT AUTO_INCREMENT PRIMARY KEY,`url` VARCHAR(
 create index IDXNAME on YUN_RECORD (`ID`,`URL`,`KEY`)
 @index_info null null YUN_RECORD
 
+select `id` ,`url` ,`key` ,`value` from YUN_RECORD group by  `id`,`url` order by `id` desc
+
+select  * from YUN_RECORD   where url like '/cem/test%'
+
+
+
+INSERT INTO YUN_RECORD SELECT * FROM CSVREAD('~/test.csv', null);
+
+DROP TABLE IF EXISTS YUN_RECORD;
+CREATE TABLE `yun_record` (`id` BIGINT AUTO_INCREMENT PRIMARY KEY,`url` VARCHAR(255) NOT NULL,`key` VARCHAR(255) NOT NULL,`value` VARCHAR(255) NOT NULL,`date_up` DATE,`date_in` DATE)
+    AS SELECT * FROM CSVREAD('~/test.csv');
+
+CALL CSVWRITE('~/test.csv', 'SELECT * FROM  YUN_RECORD ');
+SELECT * FROM CSVREAD('~/test.csv', null);
+
+//本机作为服务器进行启动。
+    private Server server;
+
+
+    @PostConstruct
+    void init(){
+        try {
+            server = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9090");
+            server.start();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PreDestroy
+    void destroy(){
+        server.shutdown();
+    }
+
+
+//本机作为h2客户端链接h2数据库。
+jdbc:h2:tcp://localhost:9090/mem:test
+
+jdbc:h2:tcp://localhost:9090/mem:test
+jdbc:h2:tcp://localhost/~/test
+
+
+
+CALL CSVWRITE('~/test.csv', 'SELECT ID,URL,KEY,VALUE FROM  YUN_RECORD ');
+
+
+insert into yun_record1 SELECT * FROM CSVREAD('~/test.csv')
+
+
+
+
+final JsonObject jsonObject = GSON.toJsonTree(<Object>).getAsJsonObject();
+for(Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+    System.out.println("Key = " + entry.getKey() + " Value = " + entry.getValue() );
+}
