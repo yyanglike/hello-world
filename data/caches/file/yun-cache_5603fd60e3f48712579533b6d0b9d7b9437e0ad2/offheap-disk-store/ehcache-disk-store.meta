@@ -1,0 +1,4 @@
+#Key and value types
+#Sun Dec 11 13:19:32 CST 2022
+valueType=java.io.Serializable
+keyType=java.io.Serializable

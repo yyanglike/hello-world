@@ -1,6 +1,6 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.6.2"
+    id("io.micronaut.application") version "3.6.3"
     id("io.micronaut.aot") version "3.6.3"
     id('org.graalvm.buildtools.native') version '0.9.13'
 }
@@ -30,6 +30,10 @@ dependencies {
     implementation("io.micronaut.nats:micronaut-nats")
 
 
+    // https://mvnrepository.com/artifact/io.micronaut/micronaut-inject-java
+    implementation("io.micronaut:micronaut-inject-java:3.7.4")
+
+
     compileOnly("org.graalvm.nativeimage:svm")
 
     annotationProcessor("io.micronaut.data:micronaut-data-hibernate-jpa")
@@ -44,6 +48,14 @@ dependencies {
     implementation('com.google.code.gson:gson:2.10')
     implementation('org.java-websocket:Java-WebSocket:1.5.4-SNAPSHOT')
 
+
+    //openapi
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi:4.7.1")
+    implementation("io.swagger.core.v3:swagger-annotations")
+
+    //cache
+    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    implementation("io.micronaut.cache:micronaut-cache-ehcache:3.5.0")
 }
 
 
@@ -51,8 +63,8 @@ application {
     mainClass.set("hello.world.Application")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("11")
-    targetCompatibility = JavaVersion.toVersion("11")
+    sourceCompatibility = JavaVersion.toVersion("1.8")
+    targetCompatibility = JavaVersion.toVersion("1.8")
 }
 
 graalvmNative.toolchainDetection = false

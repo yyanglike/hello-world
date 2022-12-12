@@ -18,7 +18,6 @@ public class Util {
                 return jsonArray;
             }
             for (int i = 0; i < jsonArray.size(); i++) {
-                JsonElement element = jsonArray.get(i);
                 JsonElement jsonElement = combinJson(jsonArray.get(i), eUpdateArray.get(i));
                 jsonArray.set(i,jsonElement);
             }
@@ -47,5 +46,8 @@ public class Util {
 
     public static String converJsonToString(JsonElement json){
         return gson.toJson(json);
+    }
+    public static <T> T convertStringToObject(String json ,Class<T> classOfT){
+        return gson.fromJson( json,classOfT);
     }
 }

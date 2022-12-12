@@ -3,11 +3,15 @@ package hello.world;
 import hello.world.datamanager.DataManager;
 import hello.world.jdbc.dto.YunRecordRepository;
 import hello.world.jdbc.entity.YunRecord;
-import hello.world.nats.NATSMessage;
 import hello.world.util.RingBuffer;
 import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.serde.ObjectMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.h2.tools.Csv;
 import org.h2.tools.SimpleResultSet;
 import org.reactivestreams.Publisher;
@@ -21,7 +25,6 @@ import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
@@ -32,8 +35,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class HelloControllerController {
     @Inject
     DataService dataService;
-    @Inject
-    NATSMessage natsMessage;
 
     @Inject
     YunRecordRepository yunRecordRepository;
@@ -42,25 +43,41 @@ public class HelloControllerController {
     @Inject
     ObjectMapper objectMapper;
 
-    RingBuffer<Long> ringBuffer = new RingBuffer(40);
+    RingBuffer<Long> ringBuffer = new RingBuffer<Long>(40);
 
     @Get(uri="/", produces="text/plain")
     public String index() {
 
-        return dataService.getAll() + dataService.getAllMultimap();
+//        return dataService.getAll() + dataService.getAllMultimap();
 
-        // return "Example Response";
+         return "Example Response";
     }
 
+    @Operation(summary = "Greets a person",
+            description = "A friendly greeting is returned"
+    )
+    @ApiResponse(
+            content = @Content(mediaType = "text/plain",
+                    schema = @Schema(type="string"))
+    )
+    @ApiResponse(responseCode = "400", description = "Invalid Name Supplied")
+    @ApiResponse(responseCode = "404", description = "Person not found")
+    @Tag(name = "greeting")
     @Get(uri="/mul", produces="text/plain")
     public String mul() {
 
 
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+
+
+        String s = "Hello:" + Long.toString(random.nextLong(1,1000000));
+        dataService.insertIntoEhcaches(s,s);
+
         //String multimap = dataService.getMultimap();
 //        natsMessage.send("multimap".getBytes(StandardCharsets.UTF_8));
 
-        YunRecord yunRecord = new YunRecord("/cem/test","time","{'a':'b'} ");
-        yunRecordRepository.save(yunRecord);
+//        YunRecord yunRecord = new YunRecord("/cem/test","time","{'a':'b'} ");
+//        yunRecordRepository.save(yunRecord);
 
         return "Hello";
 
@@ -81,21 +98,21 @@ public class HelloControllerController {
         // return "Example Response";
     }
 
-
-    @Post(value = "/echo", consumes = MediaType.TEXT_PLAIN, produces = MediaType.TEXT_PLAIN) // 
-    public String test11(@Body String text) { // 
-        return text; // 
-    }
-
-    @Post(value = "/save")
-    @SingleResult
-    public Publisher<HttpResponse<Person>> save(@Body Publisher<Person> person) { //
-        return Mono.from(person).map(p -> {
-                    dataService.saveRedisPerson(p.getName(),p.getAge());
-                    return HttpResponse.created(p); // 
-                }
-        );
-    }
+//
+//    @Post(value = "/echo", consumes = MediaType.TEXT_PLAIN, produces = MediaType.TEXT_PLAIN) //
+//    public String test11(@Body String text) { //
+//        return text; //
+//    }
+//
+//    @Post(value = "/save")
+//    @SingleResult
+//    public Publisher<HttpResponse<Person>> save(@Body Publisher<Person> person) { //
+//        return Mono.from(person).map(p -> {
+//                    dataService.saveRedisPerson(p.getName(),p.getAge());
+//                    return HttpResponse.created(p); //
+//                }
+//        );
+//    }
 
     @Get(uri="/getSize", produces="text/plain")
     public String getBuffSize() {
@@ -111,8 +128,8 @@ public class HelloControllerController {
         ThreadLocalRandom random = ThreadLocalRandom.current();
 
 
-        String s = objectMapper.writeValueAsString(yunRecordRepository.findById(random.nextLong(1,1000000)).get());
-        return s;
+//        String s = objectMapper.writeValueAsString(yunRecordRepository.findById(random.nextLong(1,1000)).get());
+        return dataService.findByKey("Hello:" + Long.toString(random.nextLong(1,100000)));
 //        return Long.toString(dataManager.getSize()) ;
 //        return Integer.toString(dataService.getAllBuff()) ;
 
@@ -131,7 +148,7 @@ public class HelloControllerController {
     }
     @Get(uri="/getDist", produces="text/plain")
     public String getDist() {
-        List<String> dist = yunRecordRepository.queryDistinctKeyByUrl();
+        List<String> dist = yunRecordRepository.getDistinctUrl();
 //        try {
 //            return objectMapper.writeValueAsString(dist);
 //        } catch (IOException e) {
@@ -160,7 +177,15 @@ public class HelloControllerController {
 
         return "Hello";
     }
-
+    @Get(uri="/getDistMem", produces="text/plain")
+    public String getDistMem() {
+        try {
+            return objectMapper.writeValueAsString( dataService.getByUrl("quote_provider_yun") );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "Hello";
+    }
     @Get(uri="/export", produces="text/plain")
     public String export() {
 
@@ -177,7 +202,7 @@ public class HelloControllerController {
 
         for (int i = 0; i < yunRecords.getTotalPages(); i++) {
 
-            for (var v:yunRecords.getContent() ) {
+            for (YunRecord v:yunRecords.getContent() ) {
                 rs.addRow(v.getId(),v.getUrl(),v.getKey(),v.getValue(),v.getDateIn(),v.getDateUp());
             }
 
@@ -197,10 +222,10 @@ public class HelloControllerController {
     public String importData() {
         try {
             ResultSet rs = new Csv().read("./test.csv",null,null);
-            ResultSetMetaData meta = rs.getMetaData();
             while(rs.next()){
                 YunRecord yunRecord = new YunRecord(rs.getString("URL"),rs.getString("KEY"),rs.getString("VALUE"));
-                yunRecordRepository.save(yunRecord);
+                dataService.insertOrUpdateData(yunRecord.getUrl(), yunRecord.getKey(), yunRecord.getValue(), true);
+//                yunRecordRepository.save(yunRecord);
             }
         } catch (SQLException e) {
             e.printStackTrace();

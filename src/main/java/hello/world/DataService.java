@@ -1,345 +1,298 @@
 package hello.world;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.github.benmanes.caffeine.cache.Cache;
 import com.google.gson.JsonElement;
 import hello.world.jdbc.dto.YunRecordRepository;
 import hello.world.jdbc.entity.YunRecord;
 import hello.world.util.Util;
+import hello.world.yun.YunMessageListener;
+import hello.world.yun.YunWebSocket;
+import io.micronaut.cache.ehcache.EhcacheSyncCache;
+import io.micronaut.data.model.Page;
+import io.micronaut.data.model.Pageable;
 import io.micronaut.scheduling.annotation.Scheduled;
+import io.micronaut.serde.ObjectMapper;
+import org.ehcache.CacheManager;
 import org.java_websocket.enums.Opcode;
-import org.redisson.api.LocalCachedMapOptions;
-import org.redisson.api.RLocalCachedMap;
-import org.redisson.api.RRingBuffer;
-import org.redisson.api.RScoredSortedSet;
-import org.redisson.api.RSetMultimapCache;
-import org.redisson.api.RedissonClient;
-import org.redisson.api.LocalCachedMapOptions.EvictionPolicy;
-import org.redisson.api.LocalCachedMapOptions.ReconnectionStrategy;
-import org.redisson.api.LocalCachedMapOptions.StoreMode;
-import org.redisson.api.MapOptions.WriteMode;
 
-import hello.world.nats.NATSMessage;
-
-import io.micronaut.context.annotation.Context;
-import io.micronaut.context.annotation.Parallel;
+import io.micronaut.cache.SyncCache;
+import io.micronaut.cache.caffeine.DefaultDynamicCacheManager;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
-
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
 import com.google.gson.JsonObject;
 
-import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
-import org.java_websocket.handshake.ServerHandshake;
 
+
+import hello.world.util.MultiMap;
 import static com.google.gson.JsonParser.parseString;
 
-
-@Context
-@Parallel
+@Singleton
 public class DataService {
 
     private AtomicBoolean bWebsocketInit = new AtomicBoolean(false);
-    private String _userID;
-    private WebSocketClient cc;
+    private YunWebSocket cc;
 
-    @Inject
-    private RedissonClient redisson;
+//    @Inject
+//    private RedissonClient redisson;
 
     @Inject
     private YunRecordRepository yunRecordRepository;
 
+//    @Inject
+//    @Named("my-Cache")
+//    SyncCache<Cache<String,String>> syncCache;
+
     @Inject
-    NATSMessage natsMessage;
+    @Named("mulkeys")
+    SyncCache<Cache<String,Collection<String>>> syncCache1;
 
-    RScoredSortedSet<String> scoredSortedSet;
-    LocalCachedMapOptions<String, String> localCachedMapOptions;
-    RLocalCachedMap<String, String> localCachedMap;
-    RRingBuffer<String> buffer;
+//    private final CacheManager cacheManager;
 
-    // UsersService usersService ;
+    @Inject
+    @Named("a-cache")
+    EhcacheSyncCache ehcacheSyncCache;
 
-    public DataService(RedissonClient redisson) {
-        this.redisson = redisson;
-        this.scoredSortedSet = redisson.getScoredSortedSet("hello");
-        this.localCachedMapOptions = LocalCachedMapOptions.<String,String>defaults()
-        .cacheSize(1000)
-        // .cacheProvider(CacheProvider.CAFFEINE)
-        .storeMode(StoreMode.LOCALCACHE_REDIS)
-        .writeBehindBatchSize(10000)
-        .writeBehindDelay(100)
-        .storeCacheMiss(true)
-        .writeMode(WriteMode.WRITE_BEHIND)
-        // .writerAsync(new MapWriterAsync<String,String>() {
+    @Inject
+    ObjectMapper objectMapper;
 
-        //     @Override
-        //     public CompletionStage<Void> write(Map<String, String> map) {
-        //         // TODO Auto-generated method stub
+    @Inject
+    DefaultDynamicCacheManager defaultDynamicCacheManager;
 
-        //         try {
-        //             System.out.println("MapWrite" + Integer.toString(map.size()));
-        //             mySQL.putAll(map);
-        //             return CompletableFuture.completedFuture(null);
-        //         } catch (SQLException e) {
-        //             // TODO Auto-generated catch block
-        //             e.printStackTrace();
-        //         };
-        //         return CompletableFuture.completedFuture(null);
-        //     }
+//    RScoredSortedSet<String> scoredSortedSet;
+//    LocalCachedMapOptions<String,String> localCachedMapOptions;
+//    RLocalCachedMap<String, String> localCachedMap;
+//    RLocalCachedMap<String,String> localYunRecordCachedMap;
 
-        //     @Override
-        //     public CompletionStage<Void> delete(Collection<String> keys) {
-        //         // TODO Auto-generated method stub
-        //         return null;
-        //     }
-            
-        // })
-        // .writer(new MapWriter<String,String>() {
+    MultiMap<String,String> multiMapCache;
 
-        //     @Override
-        //     public void write(Map<String, String> map) {
-        //         // TODO Auto-generated method stub
-        //         System.out.println("MapWrite" + Integer.toString(map.size()));
-        //         // for (String string : map.keySet()) {
-        //         //     natsMessage.send(string.getBytes());
-        //         // }
+//    RRingBuffer<String> buffer;
 
-        //         // try {
-        //         //     mySQL.putAll(map);
-        //         // } catch (SQLException e) {
-        //         //     // TODO Auto-generated catch block
-        //         //     e.printStackTrace();
-        //         // };
+    //ehcache
+    org.ehcache.Cache<String, String> cache;
 
-        //     }
-
-        //     @Override
-        //     public void delete(Collection<String> keys) {
-        //         // TODO Auto-generated method stub
-                
-        //     }
-            
-        // })
-        // .loader(new MapLoader<String,String>() {
-
-        //     @Override
-        //     public String load(String key) {
-        //         // TODO Auto-generated method stub
-        //         return null;
-        //     }
-
-        //     @Override
-        //     public Iterable<String> loadAllKeys() {
-        //         // TODO Auto-generated method stub
-        //         return null;
-        //     }
-            
-        // })
-        .reconnectionStrategy(ReconnectionStrategy.LOAD)
-        .evictionPolicy(EvictionPolicy.LRU)
-        .timeToLive(10000, TimeUnit.SECONDS);
-
-        this.localCachedMap = redisson.getLocalCachedMap("testMap", new org.redisson.codec.JsonJacksonCodec(),this.localCachedMapOptions);
+    public DataService( CacheManager cacheManager) {
+//        this.redisson = redisson;
+//        this.scoredSortedSet = redisson.getScoredSortedSet("hello");
+//        this.localCachedMapOptions = LocalCachedMapOptions.<String,String>defaults()
+//        .cacheSize(10000)
+//        // .cacheProvider(CacheProvider.CAFFEINE)
+//        .storeMode(StoreMode.LOCALCACHE_REDIS)
+//        .writeBehindBatchSize(5000)
+//        .writeBehindDelay(100)
+//        .storeCacheMiss(true)
+//        .writeMode(WriteMode.WRITE_BEHIND)
+//        // .writerAsync(new MapWriterAsync<String,String>() {
+//
+//        //     @Override
+//        //     public CompletionStage<Void> write(Map<String, String> map) {
+//        //         try {
+//        //             System.out.println("MapWrite" + Integer.toString(map.size()));
+//        //             mySQL.putAll(map);
+//        //             return CompletableFuture.completedFuture(null);
+//        //         } catch (SQLException e) {
+//        //             e.printStackTrace();
+//        //         };
+//        //         return CompletableFuture.completedFuture(null);
+//        //     }
+//
+//        //     @Override
+//        //     public CompletionStage<Void> delete(Collection<String> keys) {
+//        //         return null;
+//        //     }
+//
+//        // })
+//        // .writer(new MapWriter<String,String>() {
+//
+//        //     @Override
+//        //     public void write(Map<String, String> map) {
+//        //         System.out.println("MapWrite" + Integer.toString(map.size()));
+//        //         // for (String string : map.keySet()) {
+//        //         //     natsMessage.send(string.getBytes());
+//        //         // }
+//
+//        //         // try {
+//        //         //     mySQL.putAll(map);
+//        //         // } catch (SQLException e) {
+//        //         //     e.printStackTrace();
+//        //         // };
+//
+//        //     }
+//
+//        //     @Override
+//        //     public void delete(Collection<String> keys) {
+//
+//        //     }
+//
+//        // })
+//        // .loader(new MapLoader<String,String>() {
+//
+//        //     @Override
+//        //     public String load(String key) {
+//        //         return null;
+//        //     }
+//
+//        //     @Override
+//        //     public Iterable<String> loadAllKeys() {
+//        //         return null;
+//        //     }
+//
+//        // })
+//        .reconnectionStrategy(ReconnectionStrategy.LOAD)
+//        .evictionPolicy(EvictionPolicy.LRU)
+//        .timeToLive(10000, TimeUnit.SECONDS);
+//
+//        this.localCachedMap = redisson.getLocalCachedMap("testMap", new org.redisson.codec.JsonJacksonCodec(),this.localCachedMapOptions);
+//        this.localYunRecordCachedMap = redisson.getLocalCachedMap("testMap", new org.redisson.codec.JsonJacksonCodec(),this.localCachedMapOptions);
+        multiMapCache = new MultiMap<>();
 
         // try {
         //     System.out.println(redisson.getConfig().toYAML());
         // } catch (IOException e) {
-        //     // TODO Auto-generated catch block
         //     e.printStackTrace();
         // }
         // usersService = new UsersService();
 
-        buffer = redisson.getRingBuffer("buff");
-        buffer.setCapacity(10000);
+//        buffer = redisson.getRingBuffer("buff");
+//        buffer.setCapacity(10000);
+
+//        this.cacheManager = cacheManager;
+//
+//        this.cache= cacheManager.createCache("yun-cache", CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, String.class
+//                , ResourcePoolsBuilder.heap(100).offheap(10, MemoryUnit.MB)));
     }
 
-    public String getAll(){
+//    public String getAll(){
+//
+//        scoredSortedSet.add(10, "hello");
+//        scoredSortedSet.add(9, "world9");
+//        scoredSortedSet.add(8, "world8");
+//        scoredSortedSet.add(7, "world7");
+//        scoredSortedSet.add(6, "world6");
+//        scoredSortedSet.add(5, "world5");
+//
+//        // Collection<String> readAll = scoredSortedSet.readAll();
+//
+//        // for (String string : readAll) {
+//        //     // System.out.println(string);
+//        // }
+//
+//        String str = "example";
+//
+//        Collection<String> valueRange2 = scoredSortedSet.valueRange(0, 5);
+//        for (String string : valueRange2) {
+//            str += string;
+//            str += "  ";
+//        }
+//
+//
+//        Collection<String> valueRange = scoredSortedSet.valueRangeReversed(0, 5);
+//
+//        for (String string : valueRange) {
+//            str += string;
+//            str += "  ";
+//        }
+//
+//        scoredSortedSet.clear();
+//
+//        str += Integer.toString(scoredSortedSet.size());
+//
+//        return str;
+//    }
 
-        scoredSortedSet.add(10, "hello");
-        scoredSortedSet.add(9, "world9");
-        scoredSortedSet.add(8, "world8");
-        scoredSortedSet.add(7, "world7");
-        scoredSortedSet.add(6, "world6");
-        scoredSortedSet.add(5, "world5");
-  
-        // Collection<String> readAll = scoredSortedSet.readAll();
+//    public String getAllMultimap(){
+//
+//        RSetMultimapCache<String, String> setMultimapCache = redisson.getSetMultimapCache("myMultiMap");
+//
+//        setMultimapCache.put("1", "a");
+//        setMultimapCache.put("1", "b");
+//        setMultimapCache.put("1", "c");
+//        setMultimapCache.put("1", "d");
+//
+//        setMultimapCache.expireKey("1", 10, TimeUnit.SECONDS);
+//
+//        Set<String> all = setMultimapCache.getAll("1");
+//
+//        return all.toString();
+//
+//
+//    }
 
-        // for (String string : readAll) {
-        //     // System.out.println(string);
-        // }
+//    public String getMultimap(){
+//        RSetMultimapCache<String, String> setMultimapCache = redisson.getSetMultimapCache("myMultiMap");
+//
+//
+//        Set<String> all = setMultimapCache.getAll("1");
+//
+//
+//        this.localCachedMap.put("hello", "World");
+//
+//        return all.toString();
+//    }
 
-        String str = "example";
-
-        Collection<String> valueRange2 = scoredSortedSet.valueRange(0, 5);
-        for (String string : valueRange2) {
-            str += string;
-            str += "  ";            
-        }
-
-
-        Collection<String> valueRange = scoredSortedSet.valueRangeReversed(0, 5);
-
-        for (String string : valueRange) {
-            str += string;
-            str += "  ";  
-        }
-
-        scoredSortedSet.clear();
-
-        str += Integer.toString(scoredSortedSet.size());
-
-        return str;        
-    }
-
-    public String getAllMultimap(){
-
-        RSetMultimapCache<String, String> setMultimapCache = redisson.getSetMultimapCache("myMultiMap");
-
-        setMultimapCache.put("1", "a");
-        setMultimapCache.put("1", "b");
-        setMultimapCache.put("1", "c");
-        setMultimapCache.put("1", "d");
-
-        setMultimapCache.expireKey("1", 10, TimeUnit.SECONDS);
-
-        Set<String> all = setMultimapCache.getAll("1");
-        
-        return all.toString();
-
-
-    }
-
-    public String getMultimap(){
-        RSetMultimapCache<String, String> setMultimapCache = redisson.getSetMultimapCache("myMultiMap");
-
-           
-        Set<String> all = setMultimapCache.getAll("1");
-
-        
-        this.localCachedMap.put("hello", "World");
-        
-        return all.toString();
-    }
-
-    public int getAllBuff(){
-
-        return buffer.size();
-    }
-    public String saveRedisPerson(String name,int age){        
-        String key = "hello" + Long.toString(System.nanoTime());
-        this.localCachedMap.put( key, "World" + name + Integer.toString(age));
-        // buffer.add(key);
-        
-        return "OK";
-    }
+//    public int getAllBuff(){
+//
+//        return buffer.size();
+//    }
+//    public String saveRedisPerson(String name,int age){
+//        String key = "hello" + Long.toString(System.nanoTime());
+//        this.localCachedMap.put( key, "World" + name + Integer.toString(age));
+//        // buffer.add(key);
+//
+//        return "OK";
+//    }
+//
+//    public void saveYunRecord( String key, String value){
+//        this.localYunRecordCachedMap.fastPutAsync(key,value);
+//    }
 
 
     //yuandayun
 
     private void extracted() {
         System.out.println("================================================================");
-        bWebsocketInit.set(false);
         try {
-            cc = new WebSocketClient(new URI("wss://hqyun.ydtg.com.cn?username=abc&password=123"), new Draft_6455()) {
-                @Override
-                public void onOpen(ServerHandshake serverHandshake) {
-                    System.out.println("onOPen=======================================");
-                }
-
-                @Override
-                public void onMessage(String s) {
-//                    System.out.println(s);
-                    JsonObject msg = parseString(s).getAsJsonObject();
-
-                    if( msg != null){
-                        int iCommand = msg.get("command").getAsInt();
-                        if( iCommand != 14){
-                            int iCode = msg.get("code").getAsInt();
-
-                            if( iCode == 10007  && iCommand == 6){
-                                JsonObject obj = msg.getAsJsonObject("data");
-                                JsonObject _userObj = obj.getAsJsonObject("user");
-                                System.out.println(_userObj);
-                                if(!_userObj.isJsonNull()){
-                                    _userID = _userObj.get("id").getAsString();
-                                    System.out.println(_userID);
-                                    register_data(7,"/quote_provider_yun");
-                                }
-
-                            }
-                            else if(iCode == 1101 && iCommand == 12){
-                                JsonObject obj = msg.getAsJsonObject("data");
-                                String value = obj.get("nodeContent").getAsString();
-                                String m = value.replace('<','{');
-                                m = m.replace('$',':');
-                                m = m.replace('>','}');
-
-                                String key = obj.get("nodePath").getAsString();
-
-//                                System.out.println( key + " : "  + value);
-                                String[] split = key.split("/");
-//                                System.out.println(split[0] + "::::"+split[1]);
-                                Optional<YunRecord> byUrlEqualAndKeyEqual = yunRecordRepository.findByUrlEqualAndKeyEqual(split[1], split[2]);
-                                if(byUrlEqualAndKeyEqual.isPresent()){
-                                    JsonElement jsonElement = parseString(m);
-                                    JsonElement jsonUpdate = parseString(byUrlEqualAndKeyEqual.get().getValue());
-                                    Util.combinJson(jsonElement, jsonUpdate );
-                                    yunRecordRepository.updateById(byUrlEqualAndKeyEqual.get().getId(),Util.converJsonToString(jsonUpdate));
-                                }
-                                else {
-                                    yunRecordRepository.save(new YunRecord(split[1],split[2],m));
-                                }
-
-                            }
-                        }
-                    }
-
-                }
-//                @Override
-//                public void onMessage(ByteBuffer bytes) {
-//                    System.out.println("ByteBuffer:" + bytes);
-//                }
-
-                @Override
-                public void onClose(int i, String s, boolean b) {
-                    System.out.println(s);
-                    bWebsocketInit.set(false);
-                }
-
-                @Override
-                public void onError(Exception e) {
-//                        System.out.println(e);
-                }
-            };
-
+            cc = new YunWebSocket(new URI("wss://hqyun.ydtg.com.cn?username=abc&password=123"), new Draft_6455()) ;
+            cc.setListener(new YunMessageListener(cc, this));
             cc.connect();
         } catch (URISyntaxException ex){
             System.out.println(ex);
         }
-        bWebsocketInit.set(true);
     }
 
-    private void register_data(int cmd,String path){
-        JsonObject user = new JsonObject();
-        user.addProperty("id", _userID);
-        JsonObject reg_obj = new JsonObject();
-        reg_obj.add("user",user);
-        reg_obj.addProperty("cmd",cmd);
-        reg_obj.addProperty("path","yuanda/node"+ path);
-        if( cc != null) {
-//            cc.sendFragmentedFrame(Opcode.BINARY, ByteBuffer.wrap(reg_obj.toString().getBytes(StandardCharsets.UTF_8)),true);
-            cc.send(reg_obj.toString());
+//    public String findByKey(String key) {
+//        return this.localYunRecordCachedMap.get(key);
+//    }
+//
+//    public String getByUrlAdnKey(String urlKey){
+//        return localYunRecordCachedMap.get(urlKey);
+//    }
+    public Map<String,String> getByUrl(String url){
+        Collection<String> keySets = this.multiMapCache.get(url);
+        Map<String,String> maps = new HashMap<>();
+
+        for (String s: keySets) {
+            Optional<String> value = ehcacheSyncCache.get(url + "/" + s, String.class);
+            if(value.isPresent()){
+                maps.put( s , value.get());
+                if(maps.size() > 25 )
+                    break;
+            }
         }
+        return maps;
     }
 
-//    @Scheduled(fixedDelay = "10s")
+    @Scheduled(fixedDelay = "10s")
     public void check_connection(){
         JsonObject user = new JsonObject();
         user.addProperty("cmd",13);
@@ -351,5 +304,115 @@ public class DataService {
             if( !bWebsocketInit.get())
                 extracted();
         }
+    }
+
+    @Scheduled(fixedDelay = "30s")
+    public void saveDbToRedis(){
+        Page<YunRecord> yunRecords = yunRecordRepository.find(Pageable.from(0, 1000));
+        for (int i = 0; i < yunRecords.getTotalPages(); i++) {
+            Map<String,String> map = new HashMap<>();
+            for (YunRecord v:yunRecords.getContent() ) {
+                map.put(v.getUrl()+"/"+v.getKey(),v.getValue());
+            }
+//            this.localYunRecordCachedMap.putAll(map);
+            Pageable nextpageable = yunRecords.nextPageable();
+            yunRecords = yunRecordRepository.find(nextpageable);
+        }
+    }
+
+    public void insertOrUpdateData(String url,String key, String m,boolean bCache) {
+
+        Collection<String> setKeys = multiMapCache.get(url);
+        if(!setKeys.contains(key)){
+            setKeys.add(key);
+        }
+
+        // Add this to caffeine cache and h2 database;
+        String cacheKey = url + "/" + key;
+        Optional<String> yunRecord = ehcacheSyncCache.get(cacheKey, String.class);
+        if(yunRecord.isPresent()){
+            try {
+                YunRecord record = objectMapper.readValue(yunRecord.get(), YunRecord.class);
+                JsonElement jsonElement = parseString(m);
+                JsonElement jsonUpdate = parseString(record.getValue());
+                Util.combinJson(jsonElement, jsonUpdate );
+                String s1 = Util.converJsonToString(jsonUpdate);
+                record.setValue(s1);
+                YunRecord update = yunRecordRepository.update(record);
+                String s = objectMapper.writeValueAsString(update);
+                ehcacheSyncCache.put(cacheKey,s);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            YunRecord save = yunRecordRepository.save(new YunRecord(url, key, m));
+            if(bCache){
+                try {
+                    String s = objectMapper.writeValueAsString(save);
+                    ehcacheSyncCache.put(url+"/"+key,s);      //redis should be url + key
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+//        String yunRecord = this.findByKey(key);
+//        if(yunRecord != null){
+//            JsonElement jsonElement = parseString(m);
+//            JsonElement jsonUpdate = parseString(yunRecord);
+//            Util.combinJson(jsonElement, jsonUpdate );
+//            String s1 = Util.converJsonToString(jsonUpdate);
+//            yunRecordRepository.updateByKeyAndUrl(url, key,s1);
+//        }
+//        else {
+//            yunRecordRepository.save(new YunRecord(url, key, m));
+//            if(bRedis)
+//                this.saveYunRecord(url+"/"+key,m);      //redis should be url + key
+//        }
+
+    }
+
+    public void insertIntoEhcaches(String key,String value){
+        ehcacheSyncCache.put(key,value);
+    }
+    public String findByKey(String key){
+        Optional<String> s = ehcacheSyncCache.get(key, String.class);
+        if(s.isPresent()){
+            return s.get();
+        }
+        return "Hello";
+    }
+
+    @PostConstruct
+    void Init(){
+
+//        ehcacheSyncCache.put("Hello","World");
+//        Optional<String> hello = ehcacheSyncCache.get(new String("Hello"), String.class);
+//        System.out.println(hello.get());
+
+//         syncCache.put("bWebsocketInit", "_userID");
+//         Optional<String> optional = syncCache.get("bWebsocketInit", String.class);
+//         System.out.println(optional.get());
+
+
+//         var cache = defaultDynamicCacheManager.getCache("hello");
+//         cache.put("optional", "cache");
+//         Optional<String> optional2 = cache.get("optional", String.class);
+//         System.out.println(optional2.get());
+
+
+//        cache.putIfAbsent("optional", "20L");
+//        String optional3 = cache.get("optional");
+        // System.out.println(optional3.get());
+
+//        Set<String> keySet = localYunRecordCachedMap.keySet();
+//        Map<String, String> all = localYunRecordCachedMap.getAll(keySet);
+//        for (String string : keySet) {
+//            String[] split = string.split("/");
+//
+//            this.insertOrUpdateData(split[0],split[1],all.get(string),false);
+//            cache.put(split[0]+"/"+split[1],all.get(string));
+//        }
     }
 }

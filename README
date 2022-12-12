@@ -1,4 +1,5 @@
 
+http://localhost:8080/swagger-ui/
 
 
 ./build/native/nativeCompile/hello-world  -Xms512m -Xmx1024m -Xmn512m -XX:+PrintGC -XX:+VerboseGC
@@ -48,9 +49,13 @@ SELECT * FROM CSVREAD('~/test.csv', null);
 //本机作为h2客户端链接h2数据库。
 jdbc:h2:tcp://localhost:9090/mem:test
 
+
+
 jdbc:h2:tcp://localhost:9090/mem:test
 jdbc:h2:tcp://localhost/~/test
 
+查询表结构：
+show columns from yun_record;
 
 
 CALL CSVWRITE('~/test.csv', 'SELECT ID,URL,KEY,VALUE FROM  YUN_RECORD ');

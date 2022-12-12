@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import hello.world.jdbc.dto.YunRecordRepository;
-import hello.world.util.Util;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -26,7 +25,7 @@ public class HelloControllerControllerTest {
 
     @Inject
     YunRecordRepository yunRecordRepository;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
 
 

@@ -17,28 +17,29 @@ import java.util.Optional;
 @JdbcRepository(dialect = Dialect.H2)
 public interface YunRecordRepository extends PageableRepository<YunRecord,Long> {
     @Executable
-    List<YunRecord> findByUrl(String url) ;
+    List<YunRecord> findByUrl(@NotNull String url) ;
 
     Optional<YunRecord> findById(@NotNull Long id);
 
     Page<YunRecord> find(Pageable pageable);
 
     @Executable
-    Page<YunRecord> findByUrlEqual(String url, Pageable pageable);
+    Page<YunRecord> findByUrlEqual(@NotNull String url, @NotNull Pageable pageable);
 
     @Executable
-    List<YunRecord> findByKey(String key);
+    List<YunRecord> findByKey(@NotNull String key);
 
-    List<YunRecord> findByUrl(String title ,Pageable pageable);
+    List<YunRecord> findByUrl(@NotNull String title ,@NotNull Pageable pageable);
 
-    List<String> queryDistinctKeyByUrl();
-
-    @Executable
-    void deleteByDateInBefore(Date dateIn);
+    @Query(value = "SELECT DISTINCT url FROM YUN_RECORD ",nativeQuery = true)
+    List<String> getDistinctUrl();
 
     @Executable
-    Optional<YunRecord> findByUrlEqualAndKeyEqual(String url,String key);
+    void deleteByDateInBefore(@NotNull Date dateIn);
 
     @Executable
-    void updateById(Long id,String value);
+    Optional<YunRecord> findByUrlEqualAndKeyEqual(@NotNull String url,@NotNull String key);
+
+    @Executable
+    YunRecord update(YunRecord record);
 }

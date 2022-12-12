@@ -1,0 +1,143 @@
+openapi: 3.0.1
+paths:
+  /helloController:
+    get:
+      operationId: index
+      responses:
+        "200":
+          description: index 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/echo:
+    post:
+      operationId: test11
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: test11 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/export:
+    get:
+      operationId: export
+      responses:
+        "200":
+          description: export 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/find:
+    get:
+      operationId: findRecords
+      responses:
+        "200":
+          description: findRecords 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/getDist:
+    get:
+      operationId: getDist
+      responses:
+        "200":
+          description: getDist 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/getDistMem:
+    get:
+      operationId: getDistMem
+      responses:
+        "200":
+          description: getDistMem 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/getSize:
+    get:
+      operationId: getBuffSize
+      responses:
+        "200":
+          description: getBuffSize 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/getTitle:
+    get:
+      operationId: getTitle
+      responses:
+        "200":
+          description: getTitle 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/import:
+    get:
+      operationId: importData
+      responses:
+        "200":
+          description: importData 200 response
+          content:
+            text/plain:
+              schema:
+                type: string
+  /helloController/mul:
+    get:
+      tags:
+      - greeting
+      summary: Greets a person
+      description: A friendly greeting is returned
+      operationId: mul
+      responses:
+        "400":
+          description: Invalid Name Supplied
+        "404":
+          description: Person not found
+        "200":
+          content:
+            text/plain: {}
+  /helloController/save:
+    post:
+      operationId: save
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Person'
+        required: true
+      responses:
+        "200":
+          description: save 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+components:
+  schemas:
+    Person:
+      required:
+      - name
+      type: object
+      properties:
+        age:
+          type: integer
+          format: int32
+        name:
+          type: string
