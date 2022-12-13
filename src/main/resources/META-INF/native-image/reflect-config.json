@@ -264,6 +264,10 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"hello.world.jdbc.dto.$YunRecordRepository$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"hello.world.jdbc.entity.$YunRecord$IntrospectionRef",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -3062,46 +3066,6 @@
 {
   "name":"org.h2.server.TcpServer",
   "queryAllPublicMethods":true
-},
-{
-  "name":"org.h2.store.fs.async.FilePathAsync",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.disk.FilePathDisk",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.mem.FilePathMem",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.mem.FilePathMemLZF",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.niomapped.FilePathNioMapped",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.niomem.FilePathNioMem",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.niomem.FilePathNioMemLZF",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.retry.FilePathRetryOnInterrupt",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.split.FilePathSplit",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.store.fs.zip.FilePathZip",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.redisson.micronaut.$RedissonConfiguration$Definition$Reference",

@@ -12,9 +12,11 @@ import com.google.gson.JsonElement;
 import hello.world.jdbc.dto.YunRecordRepository;
 import hello.world.jdbc.entity.YunRecord;
 import hello.world.util.Util;
+import hello.world.yun.YunManager;
 import hello.world.yun.YunMessageListener;
 import hello.world.yun.YunWebSocket;
 import io.micronaut.cache.ehcache.EhcacheSyncCache;
+import io.micronaut.core.annotation.Order;
 import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.scheduling.annotation.Scheduled;
@@ -48,6 +50,9 @@ public class DataService {
 
     @Inject
     private YunRecordRepository yunRecordRepository;
+
+    @Inject
+    YunManager yunManager;
 
 //    @Inject
 //    @Named("my-Cache")
@@ -260,14 +265,18 @@ public class DataService {
     //yuandayun
 
     private void extracted() {
-        System.out.println("================================================================");
-        try {
-            cc = new YunWebSocket(new URI("wss://hqyun.ydtg.com.cn?username=abc&password=123"), new Draft_6455()) ;
-            cc.setListener(new YunMessageListener(cc, this));
-            cc.connect();
-        } catch (URISyntaxException ex){
-            System.out.println(ex);
-        }
+        yunManager.register_data("wss://hqyun.ydtg.com.cn?username=abc&password=123","/quote_provider_yun",this);
+//        System.out.println("================================================================");
+//        try {
+//            String url = "wss://hqyun.ydtg.com.cn?username=abc&password=123";
+//            cc = new YunWebSocket(new URI(url), new Draft_6455()) ;
+//            YunMessageListener yunMessageListener = new YunMessageListener(cc,this);
+//            cc.setListener(yunMessageListener);
+//            cc.connect();
+//            yunManager.put(url,yunMessageListener,cc);
+//        } catch (URISyntaxException ex){
+//            System.out.println(ex);
+//        }
     }
 
 //    public String findByKey(String key) {
@@ -292,19 +301,19 @@ public class DataService {
         return maps;
     }
 
-    @Scheduled(fixedDelay = "10s")
-    public void check_connection(){
-        JsonObject user = new JsonObject();
-        user.addProperty("cmd",13);
-        user.addProperty("hbbyte",-127);
-        if( cc != null &&  !cc.isClosed() && cc.isOpen()){
-            cc.sendFragmentedFrame(Opcode.BINARY, ByteBuffer.wrap(user.toString().getBytes()),true);
-        }
-        else{
-            if( !bWebsocketInit.get())
-                extracted();
-        }
-    }
+//    @Scheduled(fixedDelay = "10s")
+//    public void check_connection(){
+//        JsonObject user = new JsonObject();
+//        user.addProperty("cmd",13);
+//        user.addProperty("hbbyte",-127);
+//        if( cc != null &&  !cc.isClosed() && cc.isOpen()){
+//            cc.sendFragmentedFrame(Opcode.BINARY, ByteBuffer.wrap(user.toString().getBytes()),true);
+//        }
+//        else{
+//            if( !bWebsocketInit.get())
+//                extracted();
+//        }
+//    }
 
     @Scheduled(fixedDelay = "30s")
     public void saveDbToRedis(){
@@ -373,6 +382,30 @@ public class DataService {
 
     }
 
+    public void putCacheFromDB(){
+        Page<YunRecord> yunRecords = yunRecordRepository.find(Pageable.from(0, 2000));
+
+        for (int i = 0; i < yunRecords.getTotalPages(); i++) {
+
+            for (YunRecord v:yunRecords.getContent() ) {
+                Collection<String> setKeys = multiMapCache.get(v.getUrl());
+                if(!setKeys.contains(v.getKey())){
+                    setKeys.add(v.getKey());
+                }
+                String cacheKey = v.getUrl() + "/" +v.getKey();
+                try {
+                    String sValue = objectMapper.writeValueAsString(v);
+                    ehcacheSyncCache.put(cacheKey,sValue);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            Pageable nextpageable = yunRecords.nextPageable();
+            yunRecords = yunRecordRepository.find(nextpageable);
+        }
+    }
+
     public void insertIntoEhcaches(String key,String value){
         ehcacheSyncCache.put(key,value);
     }
@@ -386,7 +419,8 @@ public class DataService {
 
     @PostConstruct
     void Init(){
-
+        putCacheFromDB();
+        extracted();
 //        ehcacheSyncCache.put("Hello","World");
 //        Optional<String> hello = ehcacheSyncCache.get(new String("Hello"), String.class);
 //        System.out.println(hello.get());

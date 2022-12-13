@@ -74,16 +74,16 @@ jpa:
 
 
 ehcache:
-  storage-path: /Users/yangyi/company/test
+  storage-path: /Users/yangyi/caches
   caches:
     a-cache:
       enabled: true
       heap:
-        max-entries: 5000
+        max-entries: 500
       offheap:
-        max-entries: 5000000
+        max-entries: 5000
       disk:
-        max-size: 10Gb
+        max-size: 10000000000   #10Gb
 
 logger:
   levels:

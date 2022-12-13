@@ -8,6 +8,7 @@ import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.repository.PageableRepository;
+import jakarta.persistence.Table;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @JdbcRepository(dialect = Dialect.H2)
+@Table(name = "YUN_RECORD")
 public interface YunRecordRepository extends PageableRepository<YunRecord,Long> {
     @Executable
     List<YunRecord> findByUrl(@NotNull String url) ;
@@ -31,7 +33,7 @@ public interface YunRecordRepository extends PageableRepository<YunRecord,Long> 
 
     List<YunRecord> findByUrl(@NotNull String title ,@NotNull Pageable pageable);
 
-    @Query(value = "SELECT DISTINCT url FROM YUN_RECORD ",nativeQuery = true)
+//    @Query(value = "SELECT DISTINCT url FROM yun_record ;",nativeQuery = true)
     List<String> getDistinctUrl();
 
     @Executable

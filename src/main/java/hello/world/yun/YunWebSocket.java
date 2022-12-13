@@ -1,10 +1,13 @@
 package hello.world.yun;
 
+import com.google.gson.JsonObject;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
+import org.java_websocket.enums.Opcode;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
+import java.nio.ByteBuffer;
 
 public class YunWebSocket extends WebSocketClient {
 
@@ -40,5 +43,18 @@ public class YunWebSocket extends WebSocketClient {
     @Override
     public void onError(Exception e) {
         listener.onError(e);
+    }
+
+    public boolean check_connection() {
+        JsonObject user = new JsonObject();
+        user.addProperty("cmd", 13);
+        user.addProperty("hbbyte", -127);
+        if (this != null && !this.isClosed() && this.isOpen()) {
+            this.sendFragmentedFrame(Opcode.BINARY, ByteBuffer.wrap(user.toString().getBytes()), true);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
