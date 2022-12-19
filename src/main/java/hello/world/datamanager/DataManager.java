@@ -3,8 +3,6 @@ package hello.world.datamanager;
 
 import io.micronaut.context.annotation.Context;
 import org.h2.tools.Server;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -13,7 +11,7 @@ import java.sql.SQLException;
 @Context
 public class DataManager {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DataManager.class);
+    // private static final Logger LOG = LoggerFactory.getLogger(DataManager.class);
 
     private Server server;
 
@@ -23,7 +21,7 @@ public class DataManager {
         try {
             server = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9090");
             server.start();
-            LOG.debug("H2 database startup at port 9090.");
+            // LOG.debug("H2 database startup at port 9090.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

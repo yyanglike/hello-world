@@ -1,28 +1,24 @@
 package hello.world;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.google.gson.JsonElement;
 import hello.world.jdbc.dto.YunRecordRepository;
 import hello.world.jdbc.entity.YunRecord;
 import hello.world.util.Util;
+import hello.world.yun.HttpQueryObject;
 import hello.world.yun.YunManager;
-import hello.world.yun.YunMessageListener;
-import hello.world.yun.YunWebSocket;
 import io.micronaut.cache.ehcache.EhcacheSyncCache;
-import io.micronaut.core.annotation.Order;
 import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
+import io.micronaut.http.client.HttpClient;
+import io.micronaut.http.client.annotation.Client;
 import io.micronaut.scheduling.annotation.Scheduled;
 import io.micronaut.serde.ObjectMapper;
 import org.ehcache.CacheManager;
-import org.java_websocket.enums.Opcode;
 
 import io.micronaut.cache.SyncCache;
 import io.micronaut.cache.caffeine.DefaultDynamicCacheManager;
@@ -31,22 +27,19 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 
-import com.google.gson.JsonObject;
-
-import org.java_websocket.drafts.Draft_6455;
-
 
 import hello.world.util.MultiMap;
+import reactor.core.publisher.Flux;
+
 import static com.google.gson.JsonParser.parseString;
+import static io.micronaut.http.HttpRequest.POST;
 
 @Singleton
 public class DataService {
-
-    private AtomicBoolean bWebsocketInit = new AtomicBoolean(false);
-    private YunWebSocket cc;
-
 //    @Inject
 //    private RedissonClient redisson;
+
+    private static final int HttpRequest = 0;
 
     @Inject
     private YunRecordRepository yunRecordRepository;
@@ -74,12 +67,17 @@ public class DataService {
     @Inject
     DefaultDynamicCacheManager defaultDynamicCacheManager;
 
+    @Client("https://hqyun.ydtg.com.cn") @Inject HttpClient httpClient;
+
+    // String url = "https://hqyun.ydtg.com.cn/node/sdkapi?token=sgdsgdsikhuewikdnjlkgh";
+
 //    RScoredSortedSet<String> scoredSortedSet;
 //    LocalCachedMapOptions<String,String> localCachedMapOptions;
 //    RLocalCachedMap<String, String> localCachedMap;
 //    RLocalCachedMap<String,String> localYunRecordCachedMap;
 
     MultiMap<String,String> multiMapCache;
+    Map<String,String> map_keys;
 
 //    RRingBuffer<String> buffer;
 
@@ -175,6 +173,10 @@ public class DataService {
 //
 //        this.cache= cacheManager.createCache("yun-cache", CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, String.class
 //                , ResourcePoolsBuilder.heap(100).offheap(10, MemoryUnit.MB)));
+
+        map_keys = new HashMap<>();
+        map_keys.put("/quote_provider_yun","/quote_provider_yun");
+        map_keys.put("/fund_flow_yun/fund-data","/quote_provider_yun");
     }
 
 //    public String getAll(){
@@ -266,6 +268,7 @@ public class DataService {
 
     private void extracted() {
         yunManager.register_data("wss://hqyun.ydtg.com.cn?username=abc&password=123","/quote_provider_yun",this);
+        yunManager.register_data("wss://hqyun.ydtg.com.cn?username=abc&password=123","/fund_flow_yun/fund-data",this);
 //        System.out.println("================================================================");
 //        try {
 //            String url = "wss://hqyun.ydtg.com.cn?username=abc&password=123";
@@ -329,8 +332,11 @@ public class DataService {
         }
     }
 
-    public void insertOrUpdateData(String url,String key, String m,boolean bCache) {
+    public void insertOrUpdateData(String url1,String key, String m,boolean bCache) {
 
+        String url = map_keys.get(url1);
+        if(url == null)
+            return;
         Collection<String> setKeys = multiMapCache.get(url);
         if(!setKeys.contains(key)){
             setKeys.add(key);
@@ -419,6 +425,28 @@ public class DataService {
 
     @PostConstruct
     void Init(){
+        // String str = "/fund_flow_yun/fund-data/SH600000";
+        // int indexOf = str.lastIndexOf('/');
+        // String substring = str.substring(indexOf+1);
+        // String substring1 = str.substring(0, indexOf);
+
+
+        HttpQueryObject queryObject=new HttpQueryObject("/quote_provider_yun/SH000010",10,true);
+        Flux<Map> from = null;
+        from = Flux.from(httpClient.retrieve(POST("/node/sdkapi", queryObject),Map.class));
+
+        from.subscribe(map -> {
+            System.out.println(map);
+        });
+
+
+//        from.subscribe(new Consumer<Map>() {
+//            @Override
+//            public void accept(Map map) {
+//            }
+//        });
+
+
         putCacheFromDB();
         extracted();
 //        ehcacheSyncCache.put("Hello","World");

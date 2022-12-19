@@ -1,5 +1,8 @@
 package hello.world;
 
+import java.util.logging.Level;
+
+import hello.world.logs.MyLogger;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -18,12 +21,15 @@ import io.swagger.v3.oas.annotations.info.License;
         )
 )
 public class Application {
+    
+
     public static void main(String[] args) {
         try{
             ApplicationContext context = Micronaut.run(Application.class, args);
 //            NATSMessage productClient =  context.getBean(NATSMessage.class);
 //            productClient.send("Hello".getBytes());
-
+            MyLogger.logs(Level.INFO,"Hello");
+            
         }
         catch(Exception e){
             System.out.println(e.toString());

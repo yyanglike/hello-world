@@ -3,10 +3,10 @@ micronaut:
     name: helloWorld
 
   caches:
-    test:
-      maximumSize: 20
+    mulkeys:
+      maximumSize: 10000
     my-cache:
-      maximumSize: 20
+      maximumSize: 10000
     counter:
       maximumSize: 40
           
@@ -41,21 +41,21 @@ netty:
     allocator:
       max-order: 3
 
-redisson:
-  single-server-config:
-     address: "redis://127.0.0.1:6379"
-  threads: 32
-  useScriptCache: true
-  netty-threads: 16
+# redisson:
+#   single-server-config:
+#      address: "redis://127.0.0.1:6379"
+#   threads: 32
+#   useScriptCache: true
+#   netty-threads: 16
 
-nats.addresses:
-- nats://localhost:4222
+# nats.addresses:
+# - nats://localhost:4222
 
 
 datasources:
   default:
-    url: jdbc:h2:mem:test;INIT=runscript from 'classpath:sql/create.sql';LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE
-#    url: jdbc:h2:tcp://localhost/~/test;CACHE_SIZE=30720;CACHE_TYPE=SOFT_LRU
+  #  url: jdbc:h2:mem:test;INIT=runscript from 'classpath:sql/create.sql';LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    url: jdbc:h2:tcp://localhost/~/test;CACHE_SIZE=30720;CACHE_TYPE=SOFT_LRU
     driverClassName: org.h2.Driver
     username: sa
     password: ''
@@ -74,17 +74,17 @@ jpa:
 
 
 ehcache:
-  # storage-path: ./data/caches
+  storage-path: /Users/yangyi/caches
   caches:
-    yun-cache:
+    a-cache:
+      enabled: true
       heap:
-        max-size: 200Mb
+        max-entries: 500
       offheap:
-        max-size: 1Gb
-      # disk:
-      #   max-size: 10Gb
+        max-entries: 5000
+      disk:
+        max-size: 10000000000   #10Gb
 
-
-logger:
-  levels:
-    hello.world: DEBUG
+# logger:
+#   levels:
+#     hello.world: ERROR

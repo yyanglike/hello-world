@@ -1,17 +1,46 @@
 {
   "types":[
     {
+      "name":"java.lang.String"
+    },
+    {
       "name":"java.rmi.server.RemoteObject"
     },
     {
       "name":"java.rmi.server.RemoteStub"
     },
     {
-      "name":"java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet",
-      "customTargetConstructorClass":"java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet"
+      "name":"java.util.concurrent.locks.AbstractOwnableSynchronizer"
+    },
+    {
+      "name":"java.util.concurrent.locks.AbstractQueuedSynchronizer"
+    },
+    {
+      "name":"java.util.concurrent.locks.ReentrantLock"
+    },
+    {
+      "name":"java.util.concurrent.locks.ReentrantLock$NonfairSync"
+    },
+    {
+      "name":"java.util.concurrent.locks.ReentrantLock$Sync"
     },
     {
       "name":"javax.management.remote.rmi.RMIServerImpl_Stub"
+    },
+    {
+      "name":"org.ehcache.impl.internal.concurrent.ConcurrentHashMap"
+    },
+    {
+      "name":"org.ehcache.impl.internal.concurrent.ConcurrentHashMap$Segment"
+    },
+    {
+      "name":"org.ehcache.impl.internal.concurrent.ConcurrentHashMap$Segment[]"
+    },
+    {
+      "name":"org.ehcache.impl.persistence.FileBasedStateRepository$Tuple"
+    },
+    {
+      "name":"org.ehcache.impl.serialization.TransientStateHolder"
     }
   ],
   "lambdaCapturingTypes":[

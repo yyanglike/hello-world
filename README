@@ -1,9 +1,21 @@
 
+
+是的, 一个居家, 一个到岗明细, https://kdocs.cn/l/cfVYJX6RDp0S,   https://www.kdocs.cn/l/ctVMXAw2PJFg 
+
+
+
+slf4j
+https://github.com/carljmosca/graalvm-native-image-demo
+
+
+
+
 http://localhost:8080/swagger-ui/
 
 
 ./build/native/nativeCompile/hello-world  -Xms512m -Xmx1024m -Xmn512m -XX:+PrintGC -XX:+VerboseGC
 
+select distinct url  from yun_record
 
 DROP TABLE IF EXISTS YUN_RECORD;
 CREATE TABLE `yun_record` (`id` BIGINT AUTO_INCREMENT PRIMARY KEY,`url` VARCHAR(512) NOT NULL,`key` VARCHAR(255) NOT NULL,`value` VARCHAR(4096) NOT NULL)

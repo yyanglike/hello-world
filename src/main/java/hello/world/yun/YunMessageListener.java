@@ -77,7 +77,11 @@ public class YunMessageListener implements YunMessageInterface{
 
                     String[] split = key.split("/");
 
-                    dataService.insertOrUpdateData(split[1],split[2],m,true);
+                    int indexOf = key.lastIndexOf('/');
+                    String _key  = key.substring(indexOf+1);
+                    String _url = key.substring(0, indexOf);
+
+                    dataService.insertOrUpdateData(_url,_key,m,true);
                 }
             }
         }

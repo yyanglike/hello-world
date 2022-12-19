@@ -41,20 +41,20 @@ netty:
     allocator:
       max-order: 3
 
-redisson:
-  single-server-config:
-     address: "redis://127.0.0.1:6379"
-  threads: 32
-  useScriptCache: true
-  netty-threads: 16
+# redisson:
+#   single-server-config:
+#      address: "redis://127.0.0.1:6379"
+#   threads: 32
+#   useScriptCache: true
+#   netty-threads: 16
 
-nats.addresses:
-- nats://localhost:4222
+# nats.addresses:
+# - nats://localhost:4222
 
 
 datasources:
   default:
-#    url: jdbc:h2:mem:test;INIT=runscript from 'classpath:sql/create.sql';LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+  #  url: jdbc:h2:mem:test;INIT=runscript from 'classpath:sql/create.sql';LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE
     url: jdbc:h2:tcp://localhost/~/test;CACHE_SIZE=30720;CACHE_TYPE=SOFT_LRU
     driverClassName: org.h2.Driver
     username: sa
@@ -85,6 +85,6 @@ ehcache:
       disk:
         max-size: 10000000000   #10Gb
 
-logger:
-  levels:
-    hello.world: DEBUG
+# logger:
+#   levels:
+#     hello.world: ERROR

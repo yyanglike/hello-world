@@ -1,9 +1,7 @@
 package hello.world.yun;
 
 import hello.world.DataService;
-import io.micronaut.core.annotation.Order;
 import io.micronaut.scheduling.annotation.Scheduled;
-import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import org.java_websocket.drafts.Draft_6455;
 

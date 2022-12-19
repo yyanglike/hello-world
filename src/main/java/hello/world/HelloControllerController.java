@@ -14,14 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.h2.tools.Csv;
 import org.h2.tools.SimpleResultSet;
-import org.reactivestreams.Publisher;
 
-import io.micronaut.core.async.annotation.SingleResult;
-import io.micronaut.http.HttpResponse;
-import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import jakarta.inject.Inject;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.sql.ResultSet;

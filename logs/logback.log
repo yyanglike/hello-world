@@ -1,0 +1,34 @@
+#logback.classic pattern: %d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
+20:18:20.465 INFO  i.m.context.env.DefaultEnvironment - Established active environments: [gcp, cloud]
+20:18:21.015 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+20:18:21.035 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+20:18:21.063 WARN  io.micronaut.data.query - CREATE Statement Unsuccessful: Table "YUN_RECORD" already exists; SQL statement:
+CREATE TABLE `yun_record` (`id` BIGINT AUTO_INCREMENT PRIMARY KEY,`url` VARCHAR(255) NOT NULL,`key` VARCHAR(255) NOT NULL,`value` VARCHAR(255) NOT NULL,`date_up` DATE,`date_in` DATE) [42101-210]
+20:18:21.346 INFO  org.ehcache.core.EhcacheManager - Cache 'a-cache' created in EhcacheManager.
+20:18:21.413 INFO  io.micronaut.runtime.Micronaut - Startup completed in 1240ms. Server Running: http://localhost:8080
+20:18:21.414 INFO  hello.world.Application - Info message
+20:18:21.414 ERROR hello.world.Application - Error message
+#logback.classic pattern: %d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
+20:18:45.612 INFO  i.m.context.env.DefaultEnvironment - Established active environments: [gcp, cloud]
+20:18:46.100 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+20:18:46.121 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+20:18:46.149 WARN  io.micronaut.data.query - CREATE Statement Unsuccessful: Table "YUN_RECORD" already exists; SQL statement:
+CREATE TABLE `yun_record` (`id` BIGINT AUTO_INCREMENT PRIMARY KEY,`url` VARCHAR(255) NOT NULL,`key` VARCHAR(255) NOT NULL,`value` VARCHAR(255) NOT NULL,`date_up` DATE,`date_in` DATE) [42101-210]
+20:18:46.439 INFO  org.ehcache.core.EhcacheManager - Cache 'a-cache' created in EhcacheManager.
+20:18:46.505 INFO  io.micronaut.runtime.Micronaut - Startup completed in 1161ms. Server Running: http://localhost:8080
+20:18:49.941 INFO  hello.world.Application - Info message
+20:18:52.394 ERROR hello.world.Application - Error message
+#logback.classic pattern: %d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
+20:29:10.440 INFO  i.m.context.env.DefaultEnvironment - Established active environments: [gcp, cloud]
+20:29:11.049 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+20:29:11.080 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+20:29:11.116 WARN  io.micronaut.data.query - CREATE Statement Unsuccessful: Table "YUN_RECORD" already exists; SQL statement:
+CREATE TABLE `yun_record` (`id` BIGINT AUTO_INCREMENT PRIMARY KEY,`url` VARCHAR(255) NOT NULL,`key` VARCHAR(255) NOT NULL,`value` VARCHAR(255) NOT NULL,`date_up` DATE,`date_in` DATE) [42101-210]
+20:29:11.727 INFO  org.ehcache.core.EhcacheManager - Cache 'a-cache' created in EhcacheManager.
+20:29:11.763 INFO  io.micronaut.runtime.Micronaut - Startup completed in 1930ms. Server Running: http://localhost:8080
+20:29:11.764 INFO  hello.world.Application - Info message
+20:29:11.765 ERROR hello.world.Application - Error message
+20:29:21.894 INFO  io.micronaut.runtime.Micronaut - Embedded Application shutting down
+20:29:21.989 INFO  org.ehcache.core.EhcacheManager - Cache 'a-cache' removed from EhcacheManager.
+20:29:21.998 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+20:29:22.003 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
