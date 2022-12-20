@@ -46,94 +46,6 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"ch.qos.logback.classic.encoder.PatternLayoutEncoder",
-  "queryAllPublicMethods":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.classic.pattern.DateConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.classic.pattern.LevelConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.classic.pattern.LineSeparatorConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.classic.pattern.LoggerConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.classic.pattern.MessageConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.core.OutputStreamAppender",
-  "methods":[{"name":"setEncoder","parameterTypes":["ch.qos.logback.core.encoder.Encoder"] }]
-},
-{
-  "name":"ch.qos.logback.core.encoder.LayoutWrappingEncoder",
-  "methods":[{"name":"setParent","parameterTypes":["ch.qos.logback.core.spi.ContextAware"] }]
-},
-{
-  "name":"ch.qos.logback.core.pattern.PatternLayoutEncoderBase",
-  "methods":[
-    {"name":"setOutputPatternAsHeader","parameterTypes":["boolean"] }, 
-    {"name":"setPattern","parameterTypes":["java.lang.String"] }
-  ]
-},
-{
-  "name":"ch.qos.logback.core.rolling.RollingFileAppender",
-  "queryAllPublicMethods":true,
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setFile","parameterTypes":["java.lang.String"] }, 
-    {"name":"setRollingPolicy","parameterTypes":["ch.qos.logback.core.rolling.RollingPolicy"] }
-  ]
-},
-{
-  "name":"ch.qos.logback.core.rolling.RollingPolicyBase",
-  "methods":[
-    {"name":"setFileNamePattern","parameterTypes":["java.lang.String"] }, 
-    {"name":"setParent","parameterTypes":["ch.qos.logback.core.FileAppender"] }
-  ]
-},
-{
-  "name":"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP",
-  "queryAllPublicMethods":true,
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setMaxFileSize","parameterTypes":["ch.qos.logback.core.util.FileSize"] }
-  ]
-},
-{
-  "name":"ch.qos.logback.core.rolling.TimeBasedRollingPolicy",
-  "queryAllPublicMethods":true,
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setMaxHistory","parameterTypes":["int"] }, 
-    {"name":"setTimeBasedFileNamingAndTriggeringPolicy","parameterTypes":["ch.qos.logback.core.rolling.TimeBasedFileNamingAndTriggeringPolicy"] }
-  ]
-},
-{
-  "name":"ch.qos.logback.core.rolling.helper.DateTokenConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.core.rolling.helper.IntegerTokenConverter",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"ch.qos.logback.core.util.FileSize",
-  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
-},
-{
-  "name":"com.aayushatharva.brotli4j.Brotli4jLoader"
-},
-{
   "name":"com.github.benmanes.caffeine.cache.BLCHeader$DrainStatusRef",
   "fields":[{"name":"drainStatus"}]
 },
@@ -252,12 +164,78 @@
   "queryAllPublicConstructors":true
 },
 {
-  "name":"com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"com.zaxxer.hikari.HikariConfig",
-  "allDeclaredFields":true
+  "allDeclaredFields":true,
+  "queryAllPublicMethods":true,
+  "methods":[
+    {"name":"getCatalog","parameterTypes":[] }, 
+    {"name":"getConnectionInitSql","parameterTypes":[] }, 
+    {"name":"getConnectionTestQuery","parameterTypes":[] }, 
+    {"name":"getConnectionTimeout","parameterTypes":[] }, 
+    {"name":"getDataSource","parameterTypes":[] }, 
+    {"name":"getDataSourceClassName","parameterTypes":[] }, 
+    {"name":"getDataSourceJNDI","parameterTypes":[] }, 
+    {"name":"getDataSourceProperties","parameterTypes":[] }, 
+    {"name":"getExceptionOverrideClassName","parameterTypes":[] }, 
+    {"name":"getHealthCheckProperties","parameterTypes":[] }, 
+    {"name":"getHealthCheckRegistry","parameterTypes":[] }, 
+    {"name":"getIdleTimeout","parameterTypes":[] }, 
+    {"name":"getInitializationFailTimeout","parameterTypes":[] }, 
+    {"name":"getJdbcUrl","parameterTypes":[] }, 
+    {"name":"getKeepaliveTime","parameterTypes":[] }, 
+    {"name":"getLeakDetectionThreshold","parameterTypes":[] }, 
+    {"name":"getMaxLifetime","parameterTypes":[] }, 
+    {"name":"getMaximumPoolSize","parameterTypes":[] }, 
+    {"name":"getMetricRegistry","parameterTypes":[] }, 
+    {"name":"getMetricsTrackerFactory","parameterTypes":[] }, 
+    {"name":"getMinimumIdle","parameterTypes":[] }, 
+    {"name":"getPoolName","parameterTypes":[] }, 
+    {"name":"getScheduledExecutor","parameterTypes":[] }, 
+    {"name":"getSchema","parameterTypes":[] }, 
+    {"name":"getThreadFactory","parameterTypes":[] }, 
+    {"name":"getTransactionIsolation","parameterTypes":[] }, 
+    {"name":"getValidationTimeout","parameterTypes":[] }, 
+    {"name":"isAllowPoolSuspension","parameterTypes":[] }, 
+    {"name":"isAutoCommit","parameterTypes":[] }, 
+    {"name":"isIsolateInternalQueries","parameterTypes":[] }, 
+    {"name":"isReadOnly","parameterTypes":[] }, 
+    {"name":"isRegisterMbeans","parameterTypes":[] }, 
+    {"name":"setAllowPoolSuspension","parameterTypes":["boolean"] }, 
+    {"name":"setAutoCommit","parameterTypes":["boolean"] }, 
+    {"name":"setCatalog","parameterTypes":["java.lang.String"] }, 
+    {"name":"setConnectionInitSql","parameterTypes":["java.lang.String"] }, 
+    {"name":"setConnectionTestQuery","parameterTypes":["java.lang.String"] }, 
+    {"name":"setConnectionTimeout","parameterTypes":["long"] }, 
+    {"name":"setDataSource","parameterTypes":["javax.sql.DataSource"] }, 
+    {"name":"setDataSourceClassName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setDataSourceJNDI","parameterTypes":["java.lang.String"] }, 
+    {"name":"setDataSourceProperties","parameterTypes":["java.util.Properties"] }, 
+    {"name":"setDriverClassName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setExceptionOverrideClassName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setHealthCheckProperties","parameterTypes":["java.util.Properties"] }, 
+    {"name":"setHealthCheckRegistry","parameterTypes":["java.lang.Object"] }, 
+    {"name":"setIdleTimeout","parameterTypes":["long"] }, 
+    {"name":"setInitializationFailTimeout","parameterTypes":["long"] }, 
+    {"name":"setIsolateInternalQueries","parameterTypes":["boolean"] }, 
+    {"name":"setJdbcUrl","parameterTypes":["java.lang.String"] }, 
+    {"name":"setKeepaliveTime","parameterTypes":["long"] }, 
+    {"name":"setLeakDetectionThreshold","parameterTypes":["long"] }, 
+    {"name":"setMaxLifetime","parameterTypes":["long"] }, 
+    {"name":"setMaximumPoolSize","parameterTypes":["int"] }, 
+    {"name":"setMetricRegistry","parameterTypes":["java.lang.Object"] }, 
+    {"name":"setMetricsTrackerFactory","parameterTypes":["com.zaxxer.hikari.metrics.MetricsTrackerFactory"] }, 
+    {"name":"setMinimumIdle","parameterTypes":["int"] }, 
+    {"name":"setPassword","parameterTypes":["java.lang.String"] }, 
+    {"name":"setPoolName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setReadOnly","parameterTypes":["boolean"] }, 
+    {"name":"setRegisterMbeans","parameterTypes":["boolean"] }, 
+    {"name":"setScheduledExecutor","parameterTypes":["java.util.concurrent.ScheduledExecutorService"] }, 
+    {"name":"setSchema","parameterTypes":["java.lang.String"] }, 
+    {"name":"setThreadFactory","parameterTypes":["java.util.concurrent.ThreadFactory"] }, 
+    {"name":"setTransactionIsolation","parameterTypes":["java.lang.String"] }, 
+    {"name":"setUsername","parameterTypes":["java.lang.String"] }, 
+    {"name":"setValidationTimeout","parameterTypes":["long"] }
+  ]
 },
 {
   "name":"hello.world.$DataService$Definition$Reference",
@@ -289,6 +267,10 @@
 },
 {
   "name":"hello.world.jdbc.entity.$YunRecord$IntrospectionRef",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"hello.world.logs.$MyLogger$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -453,6 +435,14 @@
 {
   "name":"io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"io.micronaut.configuration.jdbc.hikari.DatasourceConfiguration",
+  "methods":[
+    {"name":"getDriverClassName","parameterTypes":[] }, 
+    {"name":"getPassword","parameterTypes":[] }, 
+    {"name":"getUsername","parameterTypes":[] }
+  ]
 },
 {
   "name":"io.micronaut.context.annotation.Prototype"
@@ -1241,15 +1231,6 @@
   ]
 },
 {
-  "name":"io.micronaut.http.netty.stream.HttpStreamsServerHandler",
-  "methods":[
-    {"name":"channelRead","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }, 
-    {"name":"channelReadComplete","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"channelWritabilityChanged","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }
-  ]
-},
-{
   "name":"io.micronaut.http.netty.websocket.$NettyServerWebSocketBroadcaster$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -1402,25 +1383,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.http.server.netty.NettyHttpResponseFactory",
-  "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
   "name":"io.micronaut.http.server.netty.NettyHttpServer$1"
-},
-{
-  "name":"io.micronaut.http.server.netty.NettyHttpServer$Listener"
-},
-{
-  "name":"io.micronaut.http.server.netty.RoutingInBoundHandler",
-  "methods":[
-    {"name":"channelInactive","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"exceptionCaught","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Throwable"] }, 
-    {"name":"userEventTriggered","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }
-  ]
-},
-{
-  "name":"io.micronaut.http.server.netty.SmartHttpContentCompressor"
 },
 {
   "name":"io.micronaut.http.server.netty.binders.$NettyBinderRegistrar$Definition$Reference",
@@ -1471,12 +1434,6 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.micronaut.http.server.netty.decoders.HttpRequestDecoder"
-},
-{
-  "name":"io.micronaut.http.server.netty.encoders.HttpResponseEncoder"
-},
-{
   "name":"io.micronaut.http.server.netty.jackson.$JsonHttpContentSubscriberFactory$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -1519,10 +1476,6 @@
 {
   "name":"io.micronaut.http.server.netty.types.files.$FileTypeHandlerConfiguration$Definition$Reference",
   "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"io.micronaut.http.server.netty.websocket.NettyServerWebSocketUpgradeHandler",
-  "methods":[{"name":"channelInactive","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }]
 },
 {
   "name":"io.micronaut.http.server.util.$DefaultHttpClientAddressResolver$Definition$Reference",
@@ -2446,13 +2399,8 @@
     {"name":"deregister","parameterTypes":["io.netty.channel.ChannelHandlerContext","io.netty.channel.ChannelPromise"] }, 
     {"name":"disconnect","parameterTypes":["io.netty.channel.ChannelHandlerContext","io.netty.channel.ChannelPromise"] }, 
     {"name":"flush","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"read","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }
+    {"name":"read","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }
   ]
-},
-{
-  "name":"io.netty.channel.ChannelHandlerAdapter",
-  "methods":[{"name":"exceptionCaught","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Throwable"] }]
 },
 {
   "name":"io.netty.channel.ChannelInboundHandlerAdapter",
@@ -2473,18 +2421,6 @@
   "methods":[
     {"name":"channelRegistered","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
     {"name":"exceptionCaught","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Throwable"] }
-  ]
-},
-{
-  "name":"io.netty.channel.ChannelOutboundHandlerAdapter",
-  "methods":[
-    {"name":"bind","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.net.SocketAddress","io.netty.channel.ChannelPromise"] }, 
-    {"name":"close","parameterTypes":["io.netty.channel.ChannelHandlerContext","io.netty.channel.ChannelPromise"] }, 
-    {"name":"connect","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.net.SocketAddress","java.net.SocketAddress","io.netty.channel.ChannelPromise"] }, 
-    {"name":"deregister","parameterTypes":["io.netty.channel.ChannelHandlerContext","io.netty.channel.ChannelPromise"] }, 
-    {"name":"disconnect","parameterTypes":["io.netty.channel.ChannelHandlerContext","io.netty.channel.ChannelPromise"] }, 
-    {"name":"flush","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"read","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }
   ]
 },
 {
@@ -2569,19 +2505,8 @@
   ]
 },
 {
-  "name":"io.netty.handler.codec.MessageToMessageCodec",
-  "methods":[
-    {"name":"channelRead","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }, 
-    {"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }
-  ]
-},
-{
   "name":"io.netty.handler.codec.MessageToMessageDecoder",
   "methods":[{"name":"channelRead","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }]
-},
-{
-  "name":"io.netty.handler.codec.MessageToMessageEncoder",
-  "methods":[{"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }]
 },
 {
   "name":"io.netty.handler.codec.compression.JdkZlibDecoder"
@@ -2600,39 +2525,6 @@
   "name":"io.netty.handler.codec.http.HttpContentDecompressor"
 },
 {
-  "name":"io.netty.handler.codec.http.HttpContentEncoder",
-  "methods":[{"name":"channelInactive","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }]
-},
-{
-  "name":"io.netty.handler.codec.http.HttpServerCodec"
-},
-{
-  "name":"io.netty.handler.codec.http.HttpServerKeepAliveHandler",
-  "methods":[
-    {"name":"channelRead","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }, 
-    {"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }
-  ]
-},
-{
-  "name":"io.netty.handler.codec.http.websocketx.extensions.WebSocketServerExtensionHandler",
-  "methods":[
-    {"name":"channelRead","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }, 
-    {"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }
-  ]
-},
-{
-  "name":"io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler"
-},
-{
-  "name":"io.netty.handler.flow.FlowControlHandler",
-  "methods":[
-    {"name":"channelInactive","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"channelRead","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object"] }, 
-    {"name":"channelReadComplete","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"read","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }
-  ]
-},
-{
   "name":"io.netty.handler.ssl.SslHandler",
   "methods":[
     {"name":"bind","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.net.SocketAddress","io.netty.channel.ChannelPromise"] }, 
@@ -2646,15 +2538,6 @@
     {"name":"exceptionCaught","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Throwable"] }, 
     {"name":"flush","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
     {"name":"read","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }
-  ]
-},
-{
-  "name":"io.netty.handler.stream.ChunkedWriteHandler",
-  "methods":[
-    {"name":"channelInactive","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"channelWritabilityChanged","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
-    {"name":"flush","parameterTypes":["io.netty.channel.ChannelHandlerContext"] }, 
     {"name":"write","parameterTypes":["io.netty.channel.ChannelHandlerContext","java.lang.Object","io.netty.channel.ChannelPromise"] }
   ]
 },
@@ -3136,14 +3019,7 @@
 },
 {
   "name":"org.ehcache.shadow.org.terracotta.offheapstore.storage.portability.Portability",
-  "methods":[
-    {"name":"encode","parameterTypes":["java.lang.Object"] }, 
-    {"name":"equals","parameterTypes":["java.lang.Object","java.nio.ByteBuffer"] }
-  ]
-},
-{
-  "name":"org.ehcache.shadow.org.terracotta.offheapstore.storage.portability.WriteBackPortability",
-  "methods":[{"name":"decode","parameterTypes":["java.nio.ByteBuffer","org.ehcache.shadow.org.terracotta.offheapstore.storage.portability.WriteContext"] }]
+  "methods":[{"name":"encode","parameterTypes":["java.lang.Object"] }]
 },
 {
   "name":"org.ehcache.shadow.org.terracotta.offheapstore.util.ValidationTest"
@@ -3178,10 +3054,6 @@
 {
   "name":"org.h2.Driver",
   "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.h2.server.TcpServer",
-  "queryAllPublicMethods":true
 },
 {
   "name":"org.redisson.micronaut.$RedissonConfiguration$Definition$Reference",

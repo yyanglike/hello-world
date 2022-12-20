@@ -28,7 +28,7 @@ public class Application {
             ApplicationContext context = Micronaut.run(Application.class, args);
 //            NATSMessage productClient =  context.getBean(NATSMessage.class);
 //            productClient.send("Hello".getBytes());
-            MyLogger.logs(Level.INFO,"Hello");
+//            MyLogger.logs(Level.INFO,"Hello");
             
         }
         catch(Exception e){

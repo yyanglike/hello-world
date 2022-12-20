@@ -15,7 +15,9 @@ public class LoggingExample {
     
     public static void main(String[] args) {
         try {
-            LogManager.getLogManager().readConfiguration(new FileInputStream("mylogging.properties"));
+//            LogManager.getLogManager().readConfiguration(new FileInputStream("logging.properties"));
+            String path = MyLogger.class.getClassLoader().getResource("logging.properties").getFile();
+            LogManager.getLogManager().readConfiguration(new FileInputStream(path));
         } catch (SecurityException | IOException e1) {
             e1.printStackTrace();
         }
@@ -25,7 +27,7 @@ public class LoggingExample {
         logger.addHandler(new MyHandler());
         try {
             //FileHandler file name with max size and number of log files limit
-            Handler fileHandler = new FileHandler("/Users/pankaj/temp/logger.log", 2000, 5);
+            Handler fileHandler = new FileHandler("/Users/yangyi/company/test/demo/hello-world/logs/logger.log", 2000, 5);
             fileHandler.setFormatter(new MyFormatter());
             //setting custom filter for FileHandler
             fileHandler.setFilter(new MyFilter());

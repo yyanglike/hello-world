@@ -14,8 +14,10 @@ import hello.world.yun.YunManager;
 import io.micronaut.cache.ehcache.EhcacheSyncCache;
 import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
+import io.micronaut.http.HttpVersion;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
+import io.micronaut.http.uri.UriBuilder;
 import io.micronaut.scheduling.annotation.Scheduled;
 import io.micronaut.serde.ObjectMapper;
 import org.ehcache.CacheManager;
@@ -32,6 +34,7 @@ import hello.world.util.MultiMap;
 import reactor.core.publisher.Flux;
 
 import static com.google.gson.JsonParser.parseString;
+import static io.micronaut.http.HttpRequest.GET;
 import static io.micronaut.http.HttpRequest.POST;
 
 @Singleton
@@ -431,21 +434,31 @@ public class DataService {
         // String substring1 = str.substring(0, indexOf);
 
 
-        HttpQueryObject queryObject=new HttpQueryObject("/quote_provider_yun/SH000010",10,true);
-        Flux<Map> from = null;
-        from = Flux.from(httpClient.retrieve(POST("/node/sdkapi", queryObject),Map.class));
+        {
+            HttpQueryObject queryObject = new HttpQueryObject("/quote_provider_yun/SH000010", 10, true);
+            Flux<Map> from = null;
+            from = Flux.from(httpClient.retrieve(POST("/node/sdkapi", queryObject), Map.class));
 
-        from.subscribe(map -> {
-            System.out.println(map);
-        });
+            from.subscribe(new Consumer<Map>() {
+                @Override
+                public void accept(Map map) {
+                    System.out.println(map);
+                }
+            });
+        }
+        {
+            String path = UriBuilder.of("/node/getTree").queryParam("path", "/cem").queryParam("token","sgdsgdsikhuewikdnjlkgh").queryParam("limitToFirst",20).toString();
+            Flux<Map> from = null;
+            from = Flux.from(httpClient.retrieve(GET(path), Map.class));
 
 
-//        from.subscribe(new Consumer<Map>() {
-//            @Override
-//            public void accept(Map map) {
-//            }
-//        });
-
+            from.subscribe(new Consumer<Map>() {
+                @Override
+                public void accept(Map map) {
+                    System.out.println(map);
+                }
+            });
+        }
 
         putCacheFromDB();
         extracted();

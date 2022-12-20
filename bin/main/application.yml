@@ -85,6 +85,6 @@ ehcache:
       disk:
         max-size: 10000000000   #10Gb
 
-# logger:
-#   levels:
-#     hello.world: ERROR
+logger:
+  levels:
+    hello.world: INFO

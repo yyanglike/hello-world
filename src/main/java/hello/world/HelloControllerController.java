@@ -3,6 +3,7 @@ package hello.world;
 import hello.world.datamanager.DataManager;
 import hello.world.jdbc.dto.YunRecordRepository;
 import hello.world.jdbc.entity.YunRecord;
+import hello.world.logs.MyLogger;
 import hello.world.util.RingBuffer;
 import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
 
 
 @Controller("/helloController")
@@ -44,7 +46,7 @@ public class HelloControllerController {
     public String index() {
 
 //        return dataService.getAll() + dataService.getAllMultimap();
-
+        MyLogger.logs(Level.INFO,"Hello");
          return "Example Response";
     }
 
