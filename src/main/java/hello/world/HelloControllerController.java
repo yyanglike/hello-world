@@ -207,7 +207,8 @@ public class HelloControllerController {
             yunRecords = yunRecordRepository.find(nextpageable);
         }
         try {
-            new Csv().write("./test.csv",rs,null);
+            String property = System.getProperty("user.dir");
+            new Csv().write( property + "/test.csv",rs,null);
             System.out.println("Export ./test.csv OK!");
         } catch (SQLException e) {
             e.printStackTrace();
