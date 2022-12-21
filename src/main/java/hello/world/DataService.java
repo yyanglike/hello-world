@@ -11,6 +11,10 @@ import hello.world.jdbc.entity.YunRecord;
 import hello.world.util.Util;
 import hello.world.yun.HttpQueryObject;
 import hello.world.yun.YunManager;
+import io.micronaut.cache.annotation.CacheConfig;
+import io.micronaut.cache.annotation.CacheInvalidate;
+import io.micronaut.cache.annotation.CachePut;
+import io.micronaut.cache.annotation.Cacheable;
 import io.micronaut.cache.ehcache.EhcacheSyncCache;
 import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
@@ -50,9 +54,9 @@ public class DataService {
     @Inject
     YunManager yunManager;
 
-//    @Inject
-//    @Named("my-Cache")
-//    SyncCache<Cache<String,String>> syncCache;
+    @Inject
+    @Named("my-Cache")
+    SyncCache<Cache<String,Map<String,String>>> syncCache;
 
     @Inject
     @Named("mulkeys")
@@ -292,7 +296,12 @@ public class DataService {
 //    public String getByUrlAdnKey(String urlKey){
 //        return localYunRecordCachedMap.get(urlKey);
 //    }
+
     public Map<String,String> getByUrl(String url){
+        Optional<Map> s1 = syncCache.get(url, Map.class);
+        if(s1.isPresent()){
+            return s1.get();
+        }
         Collection<String> keySets = this.multiMapCache.get(url);
         Map<String,String> maps = new HashMap<>();
 
@@ -304,7 +313,13 @@ public class DataService {
                     break;
             }
         }
+        syncCache.put(url,maps);
         return maps;
+    }
+
+    @Scheduled(fixedDelay = "3s")
+    public void cacheInvalidate(String url){
+        syncCache.invalidateAll();
     }
 
 //    @Scheduled(fixedDelay = "10s")

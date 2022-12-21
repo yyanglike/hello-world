@@ -177,7 +177,7 @@ public class HelloControllerController {
     @Get(uri="/getDistMem", produces="text/plain")
     public String getDistMem() {
         try {
-            return objectMapper.writeValueAsString( dataService.getByUrl("quote_provider_yun") );
+            return objectMapper.writeValueAsString( dataService.getByUrl("/quote_provider_yun") );
         } catch (IOException e) {
             e.printStackTrace();
         }
